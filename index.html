@@ -1,9 +1,188 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="refresh" content="0; url=website.html">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Subhas Rayala</title>
+  <style>
+
+
+    #bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center center;
+    z-index: -1;
+    pointer-events: none; /* Prevents video from blocking clicks */
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+
+
+
+    h1 span.highlight_name {
+    font-weight: bold;
+    font-family: 'Hey Comic', cursive;
+    color: #f7d351;
+    }
+
+    h1.h1_1 {
+      font-weight: bold;
+      font-family: 'Coolvetica', cursive;
+      text-align: center;
+      color: #ffffff;
+      background-color: #eae6da;
+      padding: 10px;
+      border-radius: 20px;
+      opacity: 100%;
+      transition: background-color 0.3s ease;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.18); /* semi-transparent white */
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
+      backdrop-filter: blur(12px);  /* frosted blur effect */
+      -webkit-backdrop-filter: blur(12px); 
+    }
+
+    h4.h4_1 {
+      text-align: center;
+      color: white;
+      font-family: 'Coolvetica Rg', Arial, sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    h2.h2_1 {
+      font-weight: bold;
+      font-family: 'Hey Comic', cursive;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    div.content {
+      width: 50%;
+      float: right;
+    }
+    
+footer {
+      text-align: center;
+      color: #ffffff;
+      position: relative;
+      top: 30px;
+      bottom: 0px;
+      width: 100%;
+    }
+
+ul {
+  list-style: none;   /* Removes bullet points */
+  padding: 0;
+  margin: 0 auto; /* Center the list */
+  width: 200px;     /* Optional: set a fixed or max width */
+}
+
+li {
+  margin-bottom: 15px;   /* Space between links */
+}
+
+li a {
+  display: block;         /* Makes the whole link area clickable */
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.18); /* semi-transparent white */
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
+  backdrop-filter: blur(12px);  /* frosted blur effect */
+  -webkit-backdrop-filter: blur(12px); /* for Safari browser */
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+}
+@keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  li:nth-child(1) a { animation-delay: 0s; }
+  li:nth-child(2) a { animation-delay: 0.3s; }
+  li:nth-child(3) a { animation-delay: 0.6s; }
+  li:nth-child(4) a { animation-delay: 0.9s; }
+  li:nth-child(5) a { animation-delay: 1.2s; }
+  li:nth-child(6) a { animation-delay: 1.5s; }
+  
+li a:hover {
+  background-color: #f3991c;
+}
+
+.content {
+  opacity: 0;
+  animation: fadeIn 2s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+
+  </style>
 </head>
+<main>
 <body>
-  <p>Redirecting to <a href="website.html">website.html</a>...</p>
+  <video autoplay muted loop id="bg-video">
+    <source src="videos/bgvid2.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
+  </video>
+
+  <div class="content">
+    <header>
+      <h1 class="h1_1">Hi, Welcome To <span class="highlight_name">Subhas Rayala</span> Portfolio</h1>
+      <h4 class="h4_1">Chemical Engineer, Data Enthusiast, Video Editor, Gamer, Photographer, Otaku</h4>
+      <h2 class="h2_1">About Me 👇</h2>
+      <nav>
+        <ul>
+          <li><a href="career.html">Career</a></li>
+          <li><a href="eng_projects.html">Engineering Projects</a></li>
+            <li><a href="video_editing.html">Video Editing</a></li>
+            <li><a href="photography.html">Photography</a></li>
+            <li><a href="gaming.html">Gaming</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+    
+    </main>
+
+    <footer>
+      <div class="social-links">
+    <a href="https://github.com/SubhasRayala" target="_blank" rel="noopener">
+      <img src="icons/git.png" alt="github-icon" />
+    </a>
+    <a href="https://www.linkedin.com/in/subhasrayala/" target="_blank" rel="noopener">
+      <img src="icons/linkedin.png" alt="linkedin-icon" />
+    </a>
+    <a href="https://www.youtube.com/@hat7su" target="_blank" rel="noopener">
+      <img src="icons/youtube.png" alt="YouTube" />
+    </a>
+  </div>
+      <p>&copy; 2025, Subhas Rayala</p>
+    </footer>
+  </div>
 </body>
 </html>
