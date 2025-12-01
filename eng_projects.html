@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Engineering Projects</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0; min-height: 100vh;
+      background: #151518;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px; left: 20px;
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      z-index: 10;
+      transition: background-color 0.3s ease;
+    }
+    .back-button:hover { background-color: rgba(236, 159, 36, 0.8); }
+
+    .main-container {
+      max-width: 950px;
+      margin: 3rem auto;
+      padding: 2rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(11px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.29);
+      position: relative;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+      padding: 1.4rem 1rem;
+      border-radius: 16px;
+      background: rgba(0,0,0,0.08);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+    h2 { color: #ffb300; margin-bottom: 0.7rem; }
+    ul { color: #ddd; padding-left: 1.5rem; margin: 12px 0 0 0; }
+    li { margin-bottom: 0.5rem; }
+
+    /* Project card styles */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+    }
+    .project-card {
+      background: rgba(255,255,255,0.10);
+      border-radius: 16px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: flex-start;
+      transition: box-shadow 0.2s;
+      margin-bottom: 8px;
+    }
+    .project-card:hover { box-shadow: 0 4px 25px #ffb30043; }
+
+    .project-details {
+      flex: 1;
+      min-width: 210px;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-title {
+      font-size: 1.24em;
+      color: #ffd600;
+      margin-bottom: 8px;
+    }
+    .project-github {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 4px 12px;
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.98em;
+      border: 1px solid #ffb300;
+      transition: background 0.2s, color 0.2s;
+    }
+    .project-github:hover { background: #ffd600; color: #222; }
+
+    .project-attachment {
+      display: inline-block;
+      margin: 8px 0 0 12px;
+      padding: 4px 14px;
+      background: #ffeb3b33;
+      color: #222;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.97em;
+      border: 1px solid #ffd600;
+      transition: background 0.2s, color 0.2s;
+      vertical-align: middle;
+    }
+    .project-attachment:hover {
+      background: #ffd600;
+      color: #111;
+      text-decoration: underline;
+    }
+
+    /* Quick-links sidebar styles */
+    .quick-links {
+      position: fixed;
+      top: 60px; right: 20px; width: 180px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      z-index: 9999;
+      pointer-events: auto;
+    }
+    .quick-links h3 {
+      margin-top: 0; margin-bottom: 1rem; color: #fba300;
+    }
+    .quick-links ul { list-style: none; padding: 0; margin: 0; }
+    .quick-links li { margin-bottom: 10px; }
+    .quick-links a {
+      color: #ddd; text-decoration: none; transition: color 0.3s; font-weight: bold;
+    }
+    .quick-links a:hover { color: #ffcc00; text-decoration: underline; }
+
+    footer {
+      text-align: center;
+      color: #ffffff;
+      position: relative;
+      top: -20px;
+      bottom: 0px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <a href="website.html" class="back-button">&#8592; Home</a>
+
+  <!-- Quick Links Sidebar -->
+  <div class="quick-links">
+    <h3>Quick Links</h3>
+    <ul>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="video_editing.html">Video Editing</a></li>
+      <li><a href="gaming.html">Gaming</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="main-container">
+    <!-- Section 1: Intro -->
+    <section>
+      <h2>About My Engineering Projects</h2>
+      <p>
+        I love building and automating solutions that blend software, data science, and industrial processes. My interests are in data analytics, automation, machine learning and Artificial intelligence.
+      </p>
+    </section>
+
+    <!-- Section 2: Projects List -->
+    <section>
+      <h2>Projects</h2>
+      <div class="projects-list">
+        <!-- Example Project Card: Duplicate and fill as needed -->
+        <div class="project-card">
+          <div class="project-details">
+            <div class="project-title">Local-PDF-Chatbot</div>
+            <a class="project-github" href="https://github.com/SubhasRayala/Local-PDF-Chatbot" target="_blank">GitHub Repo</a>
+            <a class="project-attachment" href="projects/localpdfbot.pdf" target="_blank">📎 View Project PDF</a>
+            <ul>
+              <li>Loads all PDF files from a local folder.</li>
+              <li>Extracts text and images from each PDF page.</li>
+              <li>Filters out black, blank, very small, or distorted images.</li>
+              <li>Uses BLIP-2 to generate a caption (summary) for each valid image.</li>
+              <li>Extracts nearby text around each image to give it better context.</li>
+              <li>Combines image summary and nearby text into a single document.</li>
+              <li>Splits the full PDF text into overlapping chunks for better retrieval.</li>
+              <li>Adds metadata like PDF name and page number to each chunk.</li>
+              <li>Converts all text chunks and image-context chunks into vector embeddings.</li>
+              <li>Saves these embeddings into a FAISS vector database for fast search.</li>
+              <li>Retrieves the top 10 most relevant chunks based on a user's question.</li>
+              <li>Reranks those 10 using a BGE reranker to find the most relevant ones.</li>
+              <li>Sends the top 2 reranked chunks along with the question to a local LLM.</li>
+              <li>Generates a final answer using only the retrieved content.</li>
+              <li>Displays the answer along with source PDF names and page numbers.</li>
+              <li>Avoids repeating work by skipping already processed PDFs and images.</li>
+              <li>Works fully offline without needing internet or cloud APIs.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-details">
+            <div class="project-title">Email-Spam-Detection-ML-Model</div>
+            <a class="project-github" href="https://github.com/SubhasRayala/Email-Spam-Detection-ML-Model" target="_blank">GitHub Repo</a>
+            <ul>
+              <li>ML model using python to detect whether a mail is spam or not</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-details">
+            <div class="project-title">Credit Card Financial Dashboard</div>
+            <a class="project-github" href="https://github.com/SubhasRayala/Credit-Card-Financial-Dashboard" target="_blank">GitHub Repo</a>
+            <a class="project-attachment" href="projects/credit.pdf" target="_blank">📎 View Project PDF</a>
+            <ul>
+              <li>Developed an interactive dashboard using transaction and customer data from a SQL database, to provide real-time insights.</li>
+              <li>Streamlined Data Processing & analysis to monitor key performance metrics and trends. </li>
+              <li>hared actionable insights with stakeholders based on dashboard findings to support decision-making process.</li>
+            </ul>
+          </div>
+        </div>
+        
+          <div class="project-card">
+          <div class="project-details">
+            <div class="project-title">Sales Report DashBoard</div>
+            <a class="project-github" href="https://github.com/SubhasRayala/Sales-Report-For-SuperStores-Company" target="_blank">GitHub Repo</a>
+            <a class="project-attachment" href="projects/Sales Report.pdf" target="_blank">📎 View Project PDF</a>
+            <ul>
+              <li>Incorporated Data Analysis Techniques, Specializing in time series analysis, to deliver valuable insights, accurate sales forecasting, and interactive dashboard creation, to drive business success.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Add more .project-card blocks for additional projects -->
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/SubhasRayala" target="_blank" rel="noopener">
+        <img src="icons/git.png" alt="github-icon" />
+      </a>
+    </div>
+  </footer>
+</body>
+</html>

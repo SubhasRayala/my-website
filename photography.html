@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photography</title>
+  <style>
+
+
+          .back-button {
+  position: fixed;      /* Fixes it on the viewport */
+  top: 20px;            /* Distance from top */
+  left: 20px;           /* Distance from left */
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  z-index: 10;          /* Overlays content */
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: rgba(240, 155, 28, 0.8);
+}
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      background: #000;
+      overflow-x: hidden;
+    }
+
+    /* Background slideshow */
+ .bg-slideshow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+  filter: blur(12px) brightness(0.6);
+  transition: opacity 1s ease-in-out;
+  transform-origin: center center;
+  animation: zoomBackground 20s ease-in-out infinite;
+  opacity: 1;
+}
+
+
+/* Smooth slow zoom in and out */
+@keyframes zoomBackground {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+#photoModal {
+  padding-bottom: 20px;
+}
+    /* Dark translucent overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(12px);
+      z-index: -1;
+    }
+
+    /* Container UI panel */
+    .gallery-section {
+      position: relative;
+      max-width: 900px;
+      margin: 3rem auto;
+      background: rgba(255 255 255 / 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+
+    .gallery-section h1 {
+      margin-bottom: 2rem;
+      color: #fba300;
+    }
+
+    /* Photo grid with 2-3 per row and spacing */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Photo thumbnails styling */
+    .photo-thumb {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 3px solid rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: border-color 0.3s ease, transform 0.25s ease;
+    }
+
+    .photo-thumb:hover {
+      border-color: #ffcc00;
+      transform: scale(1.05);
+    }
+
+    /* Modal styling for full image */
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 60vw;
+      max-width: 900px;
+      max-height: 80vh;
+      background: rgba(0, 0, 0, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(255, 204, 0, 0.8);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      overflow: hidden;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    .modal img {
+      max-width: 100%;
+      max-height: calc(80vh - 60px);
+      border-radius: 16px;
+      pointer-events: none;
+    }
+
+    /* Close button for modal */
+    .close-btn {
+      align-self: flex-end;
+      margin: 10px 20px 0 0;
+      padding: 6px 16px;
+      font-size: 16px;
+      font-weight: bold;
+      background: transparent;
+      border: 2px solid #ffcc00;
+      border-radius: 8px;
+      color: #ffcc00;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background-color: #ffcc00;
+      color: #000;
+    }
+
+
+    .quick-links {
+  position: fixed;       /* Fix at viewport */
+  top: 60px;             /* Adjust top to align vertically */
+  right: 20px;           /* Right side, away from content */
+  width: 180px;
+  background: rgba(255 255 255 / 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  z-index: 9999;         /* Very high to be on top */
+  pointer-events: auto;  /* Ensure clickable */
+}
+
+
+.quick-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #fba300;
+}
+
+.quick-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quick-links li {
+  margin-bottom: 10px;
+}
+
+.quick-links a {
+  color: #ddd;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+
+.quick-links a:hover {
+  color: #ffcc00;
+  text-decoration: underline;
+}
+
+
+footer {
+      text-align: center;
+      color: #ffffff;
+      position: relative;
+      top: -20px;
+      bottom: 0px;
+      width: 100%;
+    }
+
+  </style>
+
+</head>
+
+
+
+<body>
+    
+
+    <a href="website.html" class="back-button">&#8592; Home</a>
+
+<div class="quick-links">
+  <h3>Quick Links</h3>
+  <ul>
+    <li><a href="eng_projects.html">Engineering Projects</a></li>
+    <li><a href="video_editing.html">Video Editing</a></li>
+    <li><a href="career.html">Career</a></li>
+    <li><a href="gaming.html">Gaming</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</div>
+
+
+  <!-- Background slideshow container -->
+  <div class="bg-slideshow" style="background-image: url('photography/10.jpeg');"></div>
+  <div class="overlay"></div>
+
+  <!-- Gallery section -->
+  <section class="gallery-section">
+    <h1>Photography</h1>
+    <div class="photo-grid">
+      <img src="photography/1.jpeg" alt="Photo 1" class="photo-thumb" />
+      <img src="photography/2.jpeg" alt="Photo 2" class="photo-thumb" />
+      <img src="photography/3.jpeg" alt="Photo 3" class="photo-thumb" />
+      <img src="photography/4.jpeg" alt="Photo 4" class="photo-thumb" />
+      <img src="photography/5.jpeg" alt="Photo 5" class="photo-thumb" />
+      <img src="photography/6.jpeg" alt="Photo 6" class="photo-thumb" />
+      <img src="photography/7.jpeg" alt="Photo 7" class="photo-thumb" />
+      <img src="photography/8.jpeg" alt="Photo 8" class="photo-thumb" />
+      <img src="photography/9.jpeg" alt="Photo 9" class="photo-thumb" />
+      <img src="photography/10.jpeg" alt="Photo 10" class="photo-thumb" />
+      <img src="photography/11.jpeg" alt="Photo 11" class="photo-thumb" />
+      <img src="photography/12.jpeg" alt="Photo 12" class="photo-thumb" />
+      <img src="photography/13.jpeg" alt="Photo 13" class="photo-thumb" />
+      <img src="photography/14.jpeg" alt="Photo 14" class="photo-thumb" />
+      <img src="photography/15.jpeg" alt="Photo 15" class="photo-thumb" />
+      <img src="photography/16.jpeg" alt="Photo 16" class="photo-thumb" />
+      <img src="photography/17.jpeg" alt="Photo 17" class="photo-thumb" />
+      <img src="photography/18.jpeg" alt="Photo 18" class="photo-thumb" />
+      <img src="photography/19.jpeg" alt="Photo 19" class="photo-thumb" />
+      <img src="photography/20.jpeg" alt="Photo 20" class="photo-thumb" />
+      <!-- Add or remove images as needed -->
+    </div>
+  </section>
+
+  <!-- Modal for showing full photo -->
+  <div class="modal" id="photoModal">
+    <button class="close-btn" id="closeModal">&times; Close</button>
+    <img src="" alt="Full View" id="modalImage" />
+  </div>
+
+  <script>
+
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const images = [
+        "photography/1.jpeg",
+        "photography/2.jpeg",
+        "photography/3.jpeg",
+        "photography/4.jpeg",
+        "photography/5.jpeg",
+        "photography/6.jpeg",
+        "photography/7.jpeg",
+        "photography/8.jpeg",
+        "photography/9.jpeg",
+        "photography/10.jpeg",
+        "photography/11.jpeg",
+        "photography/12.jpeg",
+        "photography/13.jpeg",
+        "photography/14.jpeg",
+        "photography/15.jpeg",
+        "photography/16.jpeg",
+        "photography/17.jpeg",
+        "photography/18.jpeg",
+        "photography/19.jpeg",
+        "photography/20.jpeg",
+
+      ];
+
+        // ✅ Preload images properly
+  images.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+
+      let currentIndex = 0;
+      const bgSlideshow = document.querySelector(".bg-slideshow");
+      const modal = document.getElementById("photoModal");
+      const modalImage = document.getElementById("modalImage");
+      const closeModalBtn = document.getElementById("closeModal");
+      const thumbs = document.querySelectorAll(".photo-thumb");
+
+    function changeBackground() {
+  console.log("Changing background to img:", images[currentIndex]);
+  
+  bgSlideshow.style.opacity = 0;   // fade out
+
+  setTimeout(() => {
+    bgSlideshow.style.backgroundImage = `url('${images[currentIndex]}')`;
+    currentIndex = (currentIndex + 1) % images.length;
+
+    bgSlideshow.style.opacity = 1; // fade in
+  }, 600);
+}
+
+
+
+
+      // Initialize background and start cycling every 2.5 seconds
+      changeBackground();
+      setInterval(changeBackground, 2500);
+
+      // Open modal on thumbnail click
+      thumbs.forEach((thumb) => {
+        thumb.addEventListener("click", () => {
+          modalImage.src = thumb.src;
+          modal.classList.add("active");
+          document.body.style.overflow = "hidden"; // disable background scroll
+        });
+      });
+
+      // Close modal on button click
+      closeModalBtn.addEventListener("click", () => {
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto"; // re-enable scroll
+      });
+
+      // Close modal if clicking outside image
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          closeModalBtn.click();
+        }
+      });
+    });
+
+  </script>
+
+   <footer>
+      <div class="social-links">
+        <a href="https://www.instagram.com/hat7su.png" target="_blank" rel="noopener">
+      <img src="icons/insta.png" alt="instagram" />
+        </a>
+    </div>
+ </footer>
+
+</body>
+
+</html>

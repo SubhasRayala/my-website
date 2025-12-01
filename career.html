@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career</title>
+
+    <Style>
+
+      .back-button {
+  position: fixed;      /* Fixes it on the viewport */
+  top: 20px;            /* Distance from top */
+  left: 20px;           /* Distance from left */
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  z-index: 10;          /* Overlays content */
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: rgba(233, 149, 31, 0.845);
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f0f0f0;
+}
+
+#bg-video {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  z-index: -2;
+  filter: brightness(0.4) blur(2px); /* Dim & blur background */
+}
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4); /* Dark translucent overlay */
+  z-index: -1;
+}
+
+section {
+  background: rgba(255 255 255 / 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.3);
+}
+
+h1, h2, h3 {
+  color: #fff;
+}
+
+p, li, h3 {
+  color: #ddd;
+}
+
+footer {
+      text-align: center;
+      color: #ffffff;
+      position: relative;
+      top: 0px;
+      bottom: 0px;
+      width: 100%;
+    }
+
+    .skills-section {
+  background: rgba(255 255 255 / 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.3);
+  color: #fff;
+}
+
+.skills-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.skills-container div {
+  flex: 1;
+}
+
+.skills-container h2 {
+  margin-bottom: 1rem;
+  color: #fba300;
+}
+
+.skills-container ul {
+  list-style-type: disc;
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #ddd;
+}
+
+.skills-container li {
+  margin-bottom: 0.6rem;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.skills-container li:hover {
+  color: #ffcc00;
+}
+
+.skills-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap; /* for better responsiveness */
+}
+
+.skills-container div {
+  flex: 1 1 30%;  /* each takes about 1/3 width, adjusts on smaller screens */
+}
+
+/* rest of styles remain the same */
+
+.quick-links {
+  position: fixed;       /* Fix at viewport */
+  top: 60px;             /* Adjust top to align vertically */
+  right: 20px;           /* Right side, away from content */
+  width: 180px;
+  background: rgba(255 255 255 / 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  z-index: 9999;         /* Very high to be on top */
+  pointer-events: auto;  /* Ensure clickable */
+}
+
+
+.quick-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #fba300;
+}
+
+.quick-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quick-links li {
+  margin-bottom: 10px;
+}
+
+.quick-links a {
+  color: #ddd;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+
+.quick-links a:hover {
+  color: #ffcc00;
+  text-decoration: underline;
+}
+
+</Style>
+</head>
+<body>
+  
+  
+
+  
+  <a href="website.html" class="back-button">&#8592; Home</a>
+
+<div class="quick-links">
+  <h3>Quick Links</h3>
+  <ul>
+    <li><a href="eng_projects.html">Engineering Projects</a></li>
+    <li><a href="video_editing.html">Video Editing</a></li>
+    <li><a href="photography.html">Photography</a></li>
+    <li><a href="gaming.html">Gaming</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</div>
+
+  <video autoplay muted loop id="bg-video">
+    <source src="videos/bgvid2.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
+  </video>
+  <div class="overlay"></div>
+
+    <section class="section_1">
+      <div class="intro">
+        <h1 class="h1_1">Hello Guys! Here, I share my professional journey, experiences, and aspirations. Explore my background, skills, and the milestones that have shaped my career path.</h1>
+      </div>
+    </section>
+
+
+    <section class="section_2">
+      <div class="About Me">
+        <h1 class="h1_1">About Me</h1>
+        <h3 class="aboutme_h3">I am a solutions engineer based in Hyderabad with a chemical engineering background, focusing on data analytics, IT-OT integration, and Industry 4.0 technologies in industrial automation. In my free time, i explore data science, emerging softwares/technology, lil bit coding, gadgets. While outside of work, I enjoy photography, gaming, video editing, music and im a good badminton player 😃</h3>
+      </div>
+    <section>
+
+    <section class="section_3">
+      <div class="Current Role">
+        <h1 class="h1_1">Current Role</h1>
+        <h2 class="h2_1">Solutions Engineer at JaajiTech ( March 2025 - Present)</h2>
+        <ul class="workexp_ul">
+            <li>Led the digital transformation of Laboratory Information Management System (LIMS) across nine dairy manufacturing sites, ensuring continuous support and operational stability.</li>
+            <li>Configured electronic Batch Manufacturing Records (e-BMR) for a specialty chemicals client, ensuring accurate and compliant documentation.</li>
+            <li>Collaborated with clients to gather and analyze requirements, translating them into comprehensive technical specifications for development teams.</li>
+            <li>Performed issue diagnosis, patch testing, and validation to maintain system reliability and minimize downtime.</li>
+            <li>Managed patch migrations and data backup procedures to guarantee data integrity and system availability.</li>
+            <li>Conducted data extraction and analysis by querying Oracle databases via TOAD and Microsoft SQL Server, while managing IIS and Windows Services to support seamless application deployment and maintenance.</li>
+            <li>Prepared detailed daily reports, weekly performance analyses, and OPC connectivity documentation for stakeholders.</li>
+            <li>Supported on-site activities including User Acceptance Testing (UAT), requirement gathering, and IT-OT system integration with client teams.</li>
+        </ul>
+      </div>
+    </section>
+
+
+   <section class="Section_4">
+
+    <div class="InternShips">
+
+      <h1 class="h1_1">Internships</h1>
+        <h2 class="Intern_comp">Toyo Engineering India Pvt Ltd</h2>
+        <h3 class="Role_name">Process Engineering Intern</h3>
+        <ul>
+          <li>Contributed to VDU Unit expansion project by performing line sizing, pump hydraulics calculations, and 
+preparing heat exchanger data sheets in compliance with industry standards. </li>
+          <li>Gained exposure to refinery equipment (valves, pumps, process units) and reviewed engineering documents 
+including Cause & Effect, Control Philosophy, PFDs, and P&IDs. </li>
+          <li>Prepared commissioning and line-listing documents to support smooth project execution. </li>
+        </ul>
+
+      <h2 class="Intern_comp">Indian Oil Corporation</h2>
+      <h3 class="Role_name">Technical Intern</h3>
+        <ul>
+          <li>Conducted Time-Series Analysis on past 5 years plant data to identify performance trends</li>
+          <li>Cleaned and processed datasets using Excel and VBA Macros, addressing shutdown periods and outliers.</li>
+          <li>Automated heat exchanger fouling analysis model, generating graphical reports. </li>
+          <li>Visualized Performance Insights through Dashboards and automated graphical reports for senior leadership.</li>
+        </ul> 
+      
+      <h2 class="Intern_comp">Institute of Chemical Technology, IOC Bhubaneswar</h2>
+      <h3 class="Role_name">ML Intern</h3>
+        <ul>
+          <li>Preprocessed image datasets and evaluated multiple machine learning models (SLM, Neural Networks), 
+achieving 80% accuracy in image classification; applied statistical analysis to improve model performance. </li>
+          <li>Gained proficiency in machine learning algorithms and statistical analysis to support data-driven decision
+making and business intelligence solutions.</li>
+        </ul>
+    </div>
+  </section>
+
+
+  <section class="skills-section">
+  <h1 class="h1_1">Skills</h1>
+  <div class="skills-container">
+    <div class="technical-skills">
+      <h2>Technical Skills</h2>
+      <ul>
+        <li>Python</li>
+        <li>Machine Learning</li>
+        <li>inSis Suite</li>
+        <li>NoSQL</li>
+        <li>Excel</li>
+        <li>Power BI</li>
+        <li>Microsoft Office</li>
+        <li>Aspen Hysys</li>
+        <li>Minitab</li>
+        <li>TOAD</li>
+        <li>MS SQL Server</li>
+        <li>IT-OT Integration</li>
+        <li>OPC UA</li>
+        <li>SCADA/DCS</li>
+        <li>Matricon</li>
+        <li>Modbus</li>
+        <li>RAG</li>
+        <li>LLMs</li>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>VS Code</li>
+      </ul>
+    </div>
+    <div class="soft-skills">
+      <h2>Soft Skills</h2>
+      <ul>
+        <li>Communication</li>
+        <li>Teamwork</li>
+        <li>Leadership</li>
+        <li>Project Management</li>
+        <li>Client Communication</li>
+        <li>Coordination</li>
+        <li>Adaptability</li>
+      </ul>
+    </div>
+    <div class="languages">
+      <h2>Languages</h2>
+      <ul>
+        <li>English</li>
+        <li>Hindi</li>
+        <li>Telugu</li>
+        <li>Japanese (Elementary)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+    <div class="Education">
+      <h1 class="h1_1">Education</h1>
+      <h2 class="Education_1">Institute of Chemical Technology, Mumbai</h2>
+      <h3 class="Degree_name">Integrated Masters of Technology in Chemical Engineering (2019 - 2024)</h3>
+      <h4 class="degree-specialization">Specialization in Petrochemicals</h4>
+
+    </div>
+  </section>
+
+  
+
+
+ <footer>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/subhasrayala/" target="_blank" rel="noopener">
+      <img src="icons/linkedin.png" alt="linkedin-icon" />
+        </a>
+    </div>
+ </footer>
+
+
+</body>
+</html>

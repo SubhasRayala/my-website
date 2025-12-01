@@ -1,0 +1,17 @@
+ <li>Loads all PDF files from a local folder.</li>
+              <li>Extracts text and images from each PDF page.</li>
+              <li>Filters out black, blank, very small, or distorted images.</li>
+              <li>Uses BLIP-2 to generate a caption (summary) for each valid image.</li>
+              <li>Extracts nearby text around each image to give it better context.</li>
+              <li>Combines image summary and nearby text into a single document.</li>
+              <li>Splits the full PDF text into overlapping chunks for better retrieval.</li>
+              <li>Adds metadata like PDF name and page number to each chunk.</li>
+              <li>Converts all text chunks and image-context chunks into vector embeddings.</li>
+                <li>Saves these embeddings into a FAISS vector database for fast search.</li>
+                <li>Retrieves the top 10 most relevant chunks based on a user's question.</li>
+                <li> Reranks those 10 using a BGE reranker to find the most relevant ones.</li>
+                <li>Sends the top 2 reranked chunks along with the question to a local LLM.</li>
+                <li>Generates a final answer using only the retrieved content.</li>
+                <li>Displays the answer along with source PDF names and page numbers.</li>
+                <li>Avoids repeating work by skipping already processed PDFs and images.</li>
+                <li>Works fully offline without needing internet or cloud APIs.</li>

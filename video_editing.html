@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Video Editing</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: #111;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px; left: 20px;
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      z-index: 10;
+      transition: background-color 0.3s ease;
+    }
+    .back-button:hover { background-color: rgba(246, 164, 49, 0.8); }
+
+    .main-container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 2rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.11);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.33);
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+      padding: 1.2rem 1rem;
+      border-radius: 16px;
+      background: rgba(0,0,0,0.06);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.09);
+    }
+    h2 { color: #ffb300; margin-bottom: 0.7rem; }
+    ul { color: #ddd; padding-left: 1.5rem; margin: 10px 0 0 0; }
+    li { margin-bottom: 0.4rem; }
+
+    /* YouTube links grid */
+    .yt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .yt-card {
+      background: rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.14);
+      transition: box-shadow 0.2s;
+    }
+    .yt-card:hover {
+      box-shadow: 0 4px 20px #ffb30055;
+    }
+    .yt-card iframe, .yt-card img {
+      width: 100%;
+      max-width: 300px;
+      height: 170px;
+      border-radius: 9px;
+      margin-bottom: 0.3rem;
+    }
+    .next-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .next-icon {
+      font-size: 32px;
+      color: #ffb300;
+      cursor: pointer;
+      background: rgba(255,255,255,0.19);
+      border-radius: 50%;
+      padding: 12px 16px;
+      transition: background 0.2s;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .next-icon:hover {
+      background: #ffb300;
+      color: #000;
+    }
+    /* Project resources grid */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .resource-card {
+      background: rgba(255,255,255,0.13);
+      border-radius: 13px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.13);
+      transition: box-shadow 0.2s;
+    }
+    .resource-card:hover {
+      box-shadow: 0 4px 18px #ffb30066;
+    }
+    .resource-card img {
+      width: 140px; height: 100px;
+      object-fit: cover;
+      border-radius: 7px;
+      margin-bottom: 6px;
+      border: 2px solid #fff1;
+    }
+    .resource-card a {
+      display: block;
+      font-size: 1.1em;
+      margin-top: 6px;
+      color: #ffd600;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .resource-card a:hover { color: #ffb300; }
+
+      .quick-links {
+  position: fixed;       /* Fix at viewport */
+  top: 60px;             /* Adjust top to align vertically */
+  right: 20px;           /* Right side, away from content */
+  width: 180px;
+  background: rgba(255 255 255 / 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  z-index: 9999;         /* Very high to be on top */
+  pointer-events: auto;  /* Ensure clickable */
+}
+
+
+.quick-links h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #fba300;
+}
+
+.quick-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quick-links li {
+  margin-bottom: 10px;
+}
+
+.quick-links a {
+  color: #ddd;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+
+.quick-links a:hover {
+  color: #ffcc00;
+  text-decoration: underline;
+}
+
+
+    footer {
+      text-align: center;
+      color: #ffffff;
+      position: relative;
+      top: -20px;
+      bottom: 0px;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+  <a href="website.html" class="back-button">&#8592; Home</a>
+
+
+  <div class="quick-links">
+  <h3>Quick Links</h3>
+  <ul>
+    <li><a href="career.html">Career</a></li>
+    <li><a href="eng_projects.html">Engineering Projects</a></li>
+    <li><a href="photography.html">Photography </a></li>
+    <li><a href="gaming.html">Gaming</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</div>
+
+
+  <div class="main-container">
+
+    <!-- Section 1: How I Started and Interest Areas -->
+    <section>
+      <h2>My Journey in Video Editing</h2>
+      <p>
+        I started exploring video editing out of curiosity, experimenting with travel and gaming montages. Gradually, it became a creative passion,
+        and I enjoy crafting engaging stories through visual effects and sound design. Today, editing is a favorite hobby and a part of my project workflows!
+      </p>
+      <h3>My Editing Interests:</h3>
+      <ul>
+        <li>Cinematic travel montages</li>
+        <li>Gaming highlight reels</li>
+        <li>Vlog-style story edits</li>
+        <li>Motion graphics for social media</li>
+      </ul>
+    </section>
+
+    <!-- Section 2: YouTube Edit Links 2 side by side, 4 rows -->
+    <section>
+      <h2>My YouTube Edits</h2>
+      <div class="yt-grid">
+        <!-- Replace links with your actual YouTube videos or thumbnails -->
+        <div class="yt-card">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+          <span>Travel Montage #1</span>
+        </div>
+        <div class="yt-card">
+          <iframe src="https://www.youtube.com/embed/3dcli9i_pvA" frameborder="0" allowfullscreen></iframe>
+          <span>Gaming Edit #1</span>
+        </div>
+        <div class="yt-card">
+          <iframe src="https://youtu.be/JMmmq4NCxrk?si=eYcXhxYoHiTgEswZ" frameborder="0" allowfullscreen></iframe>
+          <span>Vlog Edit #1</span>
+        </div>
+        <div class="yt-card">
+          <iframe src="https://youtu.be/lguf0tMXSSw?si=LdDKNioGKrHWtHYf" frameborder="0" allowfullscreen></iframe>
+          <span>Motion Graphics Reel</span>
+        </div>
+        <div class="yt-card">
+          <iframe src="https://youtu.be/WctrXMKhli0?si=Y5fM5k6Ivc_brD0W" frameborder="0" allowfullscreen></iframe>
+          <span>Short Reels</span>
+        </div>
+        <div class="yt-card">
+          <iframe src="https://youtu.be/mjlLFLCHqS8?si=8s5djoRrTFx3p5Il" frameborder="0" allowfullscreen></iframe>
+          <span>Event Edit</span>
+        </div>
+        <div class="yt-card">
+          <iframe src="https://youtu.be/XIw8VMe3kcI?si=S6OgBcsKd-6bpaj3" frameborder="0" allowfullscreen></iframe>
+          <span>Personal Project</span>
+        </div>
+        <div class="yt-card">
+          <iframe src="https://youtu.be/yf1vS_ELO6w?si=qF3GiHgGmMhCJn_-" frameborder="0" allowfullscreen></iframe>
+          <span>Outro Animation</span>
+        </div>
+      </div>
+      <div class="next-page">
+        <a href="video_links2.html" class="next-icon" title="Next Page">&#8594;</a>
+      </div>
+    </section>
+
+    <!-- Section 3: Project Files and Overlays -->
+    <section>
+      <h2>My Project Resources</h2>
+      <div class="resource-grid">
+        <!-- Replace these with your project resource images and links -->
+        <div class="resource-card">
+          <img src="assets/overlay1.png" alt="Overlay Pack 1">
+          <a href="https://drive.google.com/drive/folders/your_1_link" target="_blank">Overlay Pack 1</a>
+        </div>
+        <div class="resource-card">
+          <img src="assets/overlay2.png" alt="Overlay Pack 2">
+          <a href="https://drive.google.com/drive/folders/your_2_link" target="_blank">Overlay Pack 2</a>
+        </div>
+        <div class="resource-card">
+          <img src="assets/projectfile1.png" alt="Project File 1">
+          <a href="https://drive.google.com/drive/folders/your_3_link" target="_blank">Project File 1</a>
+        </div>
+        <div class="resource-card">
+          <img src="assets/transitionpack.png" alt="Transitions Pack">
+          <a href="https://drive.google.com/drive/folders/your_4_link" target="_blank">Transitions Pack</a>
+        </div>
+        <!-- Add more as needed -->
+      </div>
+    </section>
+  </div>
+
+   <footer>
+      <div class="social-links">
+        <a href="https://www.youtube.com/@hat7su" target="_blank" rel="noopener">
+      <img src="icons/youtube.png" alt="youtube" />
+        </a>
+    </div>
+ </footer>
+</body>
+</html>
