@@ -1,357 +1,810 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Career</title>
-
-    <Style>
-
-      .back-button {
-  position: fixed;      /* Fixes it on the viewport */
-  top: 20px;            /* Distance from top */
-  left: 20px;           /* Distance from left */
-  background-color: rgba(0,0,0,0.6);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  font-family: Arial, sans-serif;
-  z-index: 10;          /* Overlays content */
-  transition: background-color 0.3s ease;
-}
-
-.back-button:hover {
-  background-color: rgba(233, 149, 31, 0.845);
-}
-
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #f0f0f0;
-}
-
-#bg-video {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  object-position: center;
-  z-index: -2;
-  filter: brightness(0.4) blur(2px); /* Dim & blur background */
-}
-
-.overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.4); /* Dark translucent overlay */
-  z-index: -1;
-}
-
-section {
-  background: rgba(255 255 255 / 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 2rem;
-  margin: 2rem auto;
-  max-width: 900px;
-  box-shadow: 0 8px 32px rgb(0 0 0 / 0.3);
-}
-
-h1, h2, h3 {
-  color: #fff;
-}
-
-p, li, h3 {
-  color: #ddd;
-}
-
-footer {
-      text-align: center;
-      color: #ffffff;
-      position: relative;
-      top: 0px;
-      bottom: 0px;
-      width: 100%;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Career - Subhas Rayala</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .skills-section {
-  background: rgba(255 255 255 / 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 2rem;
-  margin: 2rem auto;
-  max-width: 900px;
-  box-shadow: 0 8px 32px rgb(0 0 0 / 0.3);
-  color: #fff;
-}
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
 
-.skills-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-}
+    /* Animated Gradient Background */
+    .gradient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(45deg, #000000, #1a1a1a, #000000, #0a0a0a);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
 
-.skills-container div {
-  flex: 1;
-}
+    .gradient-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15), transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1), transparent 50%),
+                  radial-gradient(circle at 40% 20%, rgba(200, 200, 255, 0.1), transparent 50%);
+      animation: float 20s ease-in-out infinite;
+    }
 
-.skills-container h2 {
-  margin-bottom: 1rem;
-  color: #fba300;
-}
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-.skills-container ul {
-  list-style-type: disc;
-  margin: 0;
-  padding-left: 1.5rem;
-  color: #ddd;
-}
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+    }
 
-.skills-container li {
-  margin-bottom: 0.6rem;
-  transition: color 0.3s ease;
-  cursor: pointer;
-}
+    /* Cursor glow effect */
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+      z-index: 9999;
+      opacity: 0;
+    }
 
-.skills-container li:hover {
-  color: #ffcc00;
-}
+    /* Particles */
+    .particle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
 
-.skills-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap; /* for better responsiveness */
-}
+    /* Back Button */
+    .back-button {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-.skills-container div {
-  flex: 1 1 30%;  /* each takes about 1/3 width, adjusts on smaller screens */
-}
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateX(-4px);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+    }
 
-/* rest of styles remain the same */
+    /* Quick Links Sidebar */
+    .quick-links {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 200px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      z-index: 1000;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      animation: slideInRight 0.6s ease-out;
+    }
 
-.quick-links {
-  position: fixed;       /* Fix at viewport */
-  top: 60px;             /* Adjust top to align vertically */
-  right: 20px;           /* Right side, away from content */
-  width: 180px;
-  background: rgba(255 255 255 / 0.15);
-  backdrop-filter: blur(12px);
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  color: #fff;
-  font-family: Arial, sans-serif;
-  z-index: 9999;         /* Very high to be on top */
-  pointer-events: auto;  /* Ensure clickable */
-}
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
 
+    .quick-links h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: rgba(255, 255, 255, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
 
-.quick-links h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  color: #fba300;
-}
+    .quick-links ul {
+      list-style: none;
+    }
 
-.quick-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+    .quick-links li {
+      margin-bottom: 10px;
+    }
 
-.quick-links li {
-  margin-bottom: 10px;
-}
+    .quick-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      display: block;
+      padding: 6px 0;
+    }
 
-.quick-links a {
-  color: #ddd;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  font-weight: bold;
-}
+    .quick-links a:hover {
+      color: #fff;
+      transform: translateX(4px);
+    }
 
-.quick-links a:hover {
-  color: #ffcc00;
-  text-decoration: underline;
-}
+    /* Resume Download Button */
+    .resume-download {
+      position: fixed;
+      top: 50%;
+      right: 24px;
+      width: 200px;
+      z-index: 1000;
+      transform: translateY(-50%);
+      animation: slideInRight 0.6s ease-out 0.2s backwards;
+    }
 
-</Style>
+    .download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 20px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .download-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+    }
+
+    .download-btn:active {
+      transform: translateY(0);
+    }
+
+    .download-icon {
+      font-size: 1.2rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 100px 20px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .page-title {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-subtitle {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 50px;
+      padding: 32px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease-out backwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
+                  rgba(255, 255, 255, 0.05) 0%, 
+                  transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .section:hover::before {
+      opacity: 1;
+    }
+
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.3s; }
+    .section:nth-child(4) { animation-delay: 0.4s; }
+    .section:nth-child(5) { animation-delay: 0.5s; }
+    .section:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: #fff;
+    }
+
+    .section-subtitle {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .role-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .section-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 16px;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 16px;
+    }
+
+    .section li {
+      padding-left: 28px;
+      margin-bottom: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .section li::before {
+      content: '•';
+      position: absolute;
+      left: 10px;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .skills-category {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .skills-category:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .skills-category h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .skills-category ul {
+      margin-top: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skills-category li {
+      padding: 8px 16px;
+      margin-bottom: 0;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .skills-category li:hover {
+      color: rgba(255, 255, 255, 1);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .skills-category li::before {
+      display: none;
+    }
+
+    /* Internship Card */
+    .internship-card {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .internship-card:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .company-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .degree-info {
+      margin-bottom: 8px;
+    }
+
+    .specialization {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.65);
+      font-style: italic;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      padding: 40px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeIn 2s ease-out 0.9s backwards;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .social-links a {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .social-links a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+    }
+
+    .social-links img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .quick-links,
+      .resume-download {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 80px 20px 40px;
+      }
+
+      .back-button {
+        top: 16px;
+        left: 16px;
+        padding: 10px 18px;
+        font-size: 0.9rem;
+      }
+
+      .page-title {
+        font-size: 1.8rem;
+      }
+
+      .page-subtitle {
+        font-size: 1rem;
+      }
+
+      .section {
+        padding: 24px;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="gradient-bg"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
   
-  
+  <a href="index.html" class="back-button">
+    <span>←</span> Home
+  </a>
 
-  
-  <a href="index.html" class="back-button">&#8592; Home</a>
+  <div class="quick-links">
+    <h3>Quick Links</h3>
+    <ul>
+      <li><a href="eng_projects.html">Engineering Projects</a></li>
+      <li><a href="video_editing.html">Video Editing</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
 
-<div class="quick-links">
-  <h3>Quick Links</h3>
-  <ul>
-    <li><a href="eng_projects.html">Engineering Projects</a></li>
-    <li><a href="video_editing.html">Video Editing</a></li>
-    <li><a href="photography.html">Photography</a></li>
-    <li><a href="gaming.html">Gaming</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</div>
+  <!-- Resume Download Button -->
+  <div class="resume-download">
+    <a href="Resume/Subhas_Rayala_Resume.pdf" class="download-btn" download>
+      <span class="download-icon">⬇</span>
+      <span>Download Resume</span>
+    </a>
+  </div>
 
-  <video autoplay muted loop id="bg-video">
-    <source src="videos/bgvid2.mp4" type="video/mp4" />
-    Your browser does not support HTML5 video.
-  </video>
-  <div class="overlay"></div>
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">Career</h1>
+      <p class="page-subtitle">
+        Hello! Here, I share my professional journey, experiences, and aspirations. Explore my background, skills, and the milestones that have shaped my career path.
+      </p>
+    </header>
 
-    <section class="section_1">
-      <div class="intro">
-        <h1 class="h1_1">Hello Guys! Here, I share my professional journey, experiences, and aspirations. Explore my background, skills, and the milestones that have shaped my career path.</h1>
-      </div>
+    <!-- About Me -->
+    <section class="section">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-text">
+        I am a solutions engineer based in Hyderabad with a chemical engineering background, focusing on data analytics, IT-OT integration, and Industry 4.0 technologies in industrial automation. In my free time, I explore data science, emerging softwares/technology, lil bit coding, gadgets. While outside of work, I enjoy photography, gaming, video editing, music and I'm a good badminton player 😃
+      </p>
     </section>
 
-
-    <section class="section_2">
-      <div class="About Me">
-        <h1 class="h1_1">About Me</h1>
-        <h3 class="aboutme_h3">I am a solutions engineer based in Hyderabad with a chemical engineering background, focusing on data analytics, IT-OT integration, and Industry 4.0 technologies in industrial automation. In my free time, i explore data science, emerging softwares/technology, lil bit coding, gadgets. While outside of work, I enjoy photography, gaming, video editing, music and im a good badminton player 😃</h3>
-      </div>
-    <section>
-
-    <section class="section_3">
-      <div class="Current Role">
-        <h1 class="h1_1">Current Role</h1>
-        <h2 class="h2_1">Solutions Engineer at JaajiTech ( March 2025 - Present)</h2>
-        <ul class="workexp_ul">
-            <li>Led the digital transformation of Laboratory Information Management System (LIMS) across nine dairy manufacturing sites, ensuring continuous support and operational stability.</li>
-            <li>Configured electronic Batch Manufacturing Records (e-BMR) for a specialty chemicals client, ensuring accurate and compliant documentation.</li>
-            <li>Collaborated with clients to gather and analyze requirements, translating them into comprehensive technical specifications for development teams.</li>
-            <li>Performed issue diagnosis, patch testing, and validation to maintain system reliability and minimize downtime.</li>
-            <li>Managed patch migrations and data backup procedures to guarantee data integrity and system availability.</li>
-            <li>Conducted data extraction and analysis by querying Oracle databases via TOAD and Microsoft SQL Server, while managing IIS and Windows Services to support seamless application deployment and maintenance.</li>
-            <li>Prepared detailed daily reports, weekly performance analyses, and OPC connectivity documentation for stakeholders.</li>
-            <li>Supported on-site activities including User Acceptance Testing (UAT), requirement gathering, and IT-OT system integration with client teams.</li>
-        </ul>
-      </div>
+    <!-- Current Role -->
+    <section class="section">
+      <h2 class="section-title">Current Role</h2>
+      <h3 class="section-subtitle">Solutions Engineer at JaajiTech</h3>
+      <p class="role-title">March 2025 - Present</p>
+      <ul>
+        <li>Led the digital transformation of Laboratory Information Management System (LIMS) across nine dairy manufacturing sites, ensuring continuous support and operational stability.</li>
+        <li>Configured electronic Batch Manufacturing Records (e-BMR) for a specialty chemicals client, ensuring accurate and compliant documentation.</li>
+        <li>Collaborated with clients to gather and analyze requirements, translating them into comprehensive technical specifications for development teams.</li>
+        <li>Performed issue diagnosis, patch testing, and validation to maintain system reliability and minimize downtime.</li>
+        <li>Managed patch migrations and data backup procedures to guarantee data integrity and system availability.</li>
+        <li>Conducted data extraction and analysis by querying Oracle databases via TOAD and Microsoft SQL Server, while managing IIS and Windows Services to support seamless application deployment and maintenance.</li>
+        <li>Prepared detailed daily reports, weekly performance analyses, and OPC connectivity documentation for stakeholders.</li>
+        <li>Supported on-site activities including User Acceptance Testing (UAT), requirement gathering, and IT-OT system integration with client teams.</li>
+      </ul>
     </section>
 
-
-   <section class="Section_4">
-
-    <div class="InternShips">
-
-      <h1 class="h1_1">Internships</h1>
-        <h2 class="Intern_comp">Toyo Engineering India Pvt Ltd</h2>
-        <h3 class="Role_name">Process Engineering Intern</h3>
+    <!-- Internships -->
+    <section class="section">
+      <h2 class="section-title">Internships</h2>
+      
+      <div class="internship-card">
+        <h3 class="company-name">Toyo Engineering India Pvt Ltd</h3>
+        <p class="role-title">Process Engineering Intern</p>
         <ul>
-          <li>Contributed to VDU Unit expansion project by performing line sizing, pump hydraulics calculations, and 
-preparing heat exchanger data sheets in compliance with industry standards. </li>
-          <li>Gained exposure to refinery equipment (valves, pumps, process units) and reviewed engineering documents 
-including Cause & Effect, Control Philosophy, PFDs, and P&IDs. </li>
-          <li>Prepared commissioning and line-listing documents to support smooth project execution. </li>
+          <li>Contributed to VDU Unit expansion project by performing line sizing, pump hydraulics calculations, and preparing heat exchanger data sheets in compliance with industry standards.</li>
+          <li>Gained exposure to refinery equipment (valves, pumps, process units) and reviewed engineering documents including Cause & Effect, Control Philosophy, PFDs, and P&IDs.</li>
+          <li>Prepared commissioning and line-listing documents to support smooth project execution.</li>
         </ul>
+      </div>
 
-      <h2 class="Intern_comp">Indian Oil Corporation</h2>
-      <h3 class="Role_name">Technical Intern</h3>
+      <div class="internship-card">
+        <h3 class="company-name">Indian Oil Corporation</h3>
+        <p class="role-title">Technical Intern</p>
         <ul>
           <li>Conducted Time-Series Analysis on past 5 years plant data to identify performance trends</li>
           <li>Cleaned and processed datasets using Excel and VBA Macros, addressing shutdown periods and outliers.</li>
-          <li>Automated heat exchanger fouling analysis model, generating graphical reports. </li>
+          <li>Automated heat exchanger fouling analysis model, generating graphical reports.</li>
           <li>Visualized Performance Insights through Dashboards and automated graphical reports for senior leadership.</li>
-        </ul> 
-      
-      <h2 class="Intern_comp">Institute of Chemical Technology, IOC Bhubaneswar</h2>
-      <h3 class="Role_name">ML Intern</h3>
-        <ul>
-          <li>Preprocessed image datasets and evaluated multiple machine learning models (SLM, Neural Networks), 
-achieving 80% accuracy in image classification; applied statistical analysis to improve model performance. </li>
-          <li>Gained proficiency in machine learning algorithms and statistical analysis to support data-driven decision
-making and business intelligence solutions.</li>
         </ul>
-    </div>
-  </section>
+      </div>
 
+      <div class="internship-card">
+        <h3 class="company-name">Institute of Chemical Technology, IOC Bhubaneswar</h3>
+        <p class="role-title">ML Intern</p>
+        <ul>
+          <li>Preprocessed image datasets and evaluated multiple machine learning models (SLM, Neural Networks), achieving 80% accuracy in image classification; applied statistical analysis to improve model performance.</li>
+          <li>Gained proficiency in machine learning algorithms and statistical analysis to support data-driven decision making and business intelligence solutions.</li>
+        </ul>
+      </div>
+    </section>
 
-  <section class="skills-section">
-  <h1 class="h1_1">Skills</h1>
-  <div class="skills-container">
-    <div class="technical-skills">
-      <h2>Technical Skills</h2>
-      <ul>
-        <li>Python</li>
-        <li>Machine Learning</li>
-        <li>inSis Suite</li>
-        <li>NoSQL</li>
-        <li>Excel</li>
-        <li>Power BI</li>
-        <li>Microsoft Office</li>
-        <li>Aspen Hysys</li>
-        <li>Minitab</li>
-        <li>TOAD</li>
-        <li>MS SQL Server</li>
-        <li>IT-OT Integration</li>
-        <li>OPC UA</li>
-        <li>SCADA/DCS</li>
-        <li>Matricon</li>
-        <li>Modbus</li>
-        <li>RAG</li>
-        <li>LLMs</li>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>VS Code</li>
-      </ul>
-    </div>
-    <div class="soft-skills">
-      <h2>Soft Skills</h2>
-      <ul>
-        <li>Communication</li>
-        <li>Teamwork</li>
-        <li>Leadership</li>
-        <li>Project Management</li>
-        <li>Client Communication</li>
-        <li>Coordination</li>
-        <li>Adaptability</li>
-      </ul>
-    </div>
-    <div class="languages">
-      <h2>Languages</h2>
-      <ul>
-        <li>English</li>
-        <li>Hindi</li>
-        <li>Telugu</li>
-        <li>Japanese (Elementary)</li>
-      </ul>
-    </div>
-  </div>
-</section>
+    <!-- Skills -->
+    <section class="section">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+        <div class="skills-category">
+          <h3>Technical Skills</h3>
+          <ul>
+            <li>Python</li>
+            <li>Machine Learning</li>
+            <li>inSis Suite</li>
+            <li>NoSQL</li>
+            <li>Excel</li>
+            <li>Power BI</li>
+            <li>Microsoft Office</li>
+            <li>Aspen Hysys</li>
+            <li>Minitab</li>
+            <li>TOAD</li>
+            <li>MS SQL Server</li>
+            <li>IT-OT Integration</li>
+            <li>OPC UA</li>
+            <li>SCADA/DCS</li>
+            <li>Modbus</li>
+            <li>RAG</li>
+            <li>LLMs</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>VS Code</li>
+          </ul>
+        </div>
+        <div class="skills-category">
+          <h3>Soft Skills</h3>
+          <ul>
+            <li>Communication</li>
+            <li>Teamwork</li>
+            <li>Leadership</li>
+            <li>Project Management</li>
+            <li>Client Communication</li>
+            <li>Coordination</li>
+            <li>Adaptability</li>
+          </ul>
+        </div>
+        <div class="skills-category">
+          <h3>Languages</h3>
+          <ul>
+            <li>English</li>
+            <li>Hindi</li>
+            <li>Telugu</li>
+            <li>Japanese (Elementary)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
+    <!-- Education -->
+    <section class="section">
+      <h2 class="section-title">Education</h2>
+      <h3 class="section-subtitle">Institute of Chemical Technology, Mumbai</h3>
+      <p class="role-title degree-info">Integrated Masters of Technology in Chemical Engineering (2019 - 2024)</p>
+      <p class="specialization">Specialization in Petrochemicals</p>
+    </section>
 
-
-<section>
-    <div class="Education">
-      <h1 class="h1_1">Education</h1>
-      <h2 class="Education_1">Institute of Chemical Technology, Mumbai</h2>
-      <h3 class="Degree_name">Integrated Masters of Technology in Chemical Engineering (2019 - 2024)</h3>
-      <h4 class="degree-specialization">Specialization in Petrochemicals</h4>
-
-    </div>
-  </section>
-
-  
-
-
- <footer>
+    <footer>
       <div class="social-links">
-        <a href="https://www.linkedin.com/in/subhasrayala/" target="_blank" rel="noopener">
-      <img src="icons/linkedin.png" alt="linkedin-icon" />
+        <a href="https://www.linkedin.com/in/subhasrayala/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img src="icons/linkedin.png" alt="LinkedIn" />
         </a>
-    </div>
- </footer>
+      </div>
+    </footer>
+  </div>
 
+  <script>
+    // Cursor glow effect
+    const cursorGlow = document.getElementById('cursorGlow');
+    let mouseX = 0, mouseY = 0;
+    let glowX = 0, glowY = 0;
 
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorGlow.style.opacity = '1';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursorGlow.style.opacity = '0';
+    });
+
+    function animate() {
+      glowX += (mouseX - glowX) * 0.1;
+      glowY += (mouseY - glowY) * 0.1;
+      cursorGlow.style.left = glowX + 'px';
+      cursorGlow.style.top = glowY + 'px';
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Particle system
+    const particles = [];
+    const particleCount = 80;
+    const repulsionRadius = 120;
+    const repulsionForce = 0.8;
+
+    class Particle {
+      constructor() {
+        this.reset();
+        this.element = document.createElement('div');
+        this.element.className = 'particle';
+        document.body.appendChild(this.element);
+      }
+
+      reset() {
+        this.x = Math.random() * window.innerWidth;
+        this.y = Math.random() * window.innerHeight;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.opacity = 1;
+      }
+
+      update() {
+        const dx = this.x - mouseX;
+        const dy = this.y - mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < repulsionRadius) {
+          const force = (repulsionRadius - distance) / repulsionRadius;
+          const angle = Math.atan2(dy, dx);
+          this.vx += Math.cos(angle) * force * repulsionForce;
+          this.vy += Math.sin(angle) * force * repulsionForce;
+        }
+
+        this.vx *= 0.95;
+        this.vy *= 0.95;
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0) this.x = window.innerWidth;
+        if (this.x > window.innerWidth) this.x = 0;
+        if (this.y < 0) this.y = window.innerHeight;
+        if (this.y > window.innerHeight) this.y = 0;
+
+        if (distance < repulsionRadius * 1.5) {
+          this.opacity = Math.max(0, (distance / (repulsionRadius * 1.5)));
+        } else {
+          this.opacity = Math.min(1, this.opacity + 0.02);
+        }
+
+        this.element.style.left = this.x + 'px';
+        this.element.style.top = this.y + 'px';
+        this.element.style.opacity = this.opacity;
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      particles.forEach(particle => particle.update());
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+      particles.forEach(particle => {
+        if (particle.x > window.innerWidth) particle.x = window.innerWidth;
+        if (particle.y > window.innerHeight) particle.y = window.innerHeight;
+      });
+    });
+
+    // Glow effect on sections
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+      section.addEventListener('mousemove', (e) => {
+        const rect = section.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        section.style.setProperty('--x', x + '%');
+        section.style.setProperty('--y', y + '%');
+      });
+    });
+  </script>
 </body>
 </html>

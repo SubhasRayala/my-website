@@ -1,393 +1,639 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Photography</title>
+  <title>Photography - Subhas Rayala</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-
-
-          .back-button {
-  position: fixed;      /* Fixes it on the viewport */
-  top: 20px;            /* Distance from top */
-  left: 20px;           /* Distance from left */
-  background-color: rgba(0,0,0,0.6);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  font-family: Arial, sans-serif;
-  z-index: 10;          /* Overlays content */
-  transition: background-color 0.3s ease;
-}
-
-.back-button:hover {
-  background-color: rgba(240, 155, 28, 0.8);
-}
-
-    body,
-    html {
+    * {
       margin: 0;
       padding: 0;
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #fff;
-      background: #000;
-      overflow-x: hidden;
+      box-sizing: border-box;
     }
 
-    /* Background slideshow */
- .bg-slideshow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  z-index: -2;
-  filter: blur(12px) brightness(0.6);
-  transition: opacity 1s ease-in-out;
-  transform-origin: center center;
-  animation: zoomBackground 20s ease-in-out infinite;
-  opacity: 1;
-}
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
 
-
-/* Smooth slow zoom in and out */
-@keyframes zoomBackground {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-#photoModal {
-  padding-bottom: 20px;
-}
-    /* Dark translucent overlay */
-    .overlay {
+    /* Animated Gradient Background with slideshow */
+    .gradient-bg {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(12px);
-      z-index: -1;
-    }
-
-    /* Container UI panel */
-    .gallery-section {
-      position: relative;
-      max-width: 900px;
-      margin: 3rem auto;
-      background: rgba(255 255 255 / 0.15);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      text-align: center;
-    }
-
-    .gallery-section h1 {
-      margin-bottom: 2rem;
-      color: #fba300;
-    }
-
-    /* Photo grid with 2-3 per row and spacing */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    /* Photo thumbnails styling */
-    .photo-thumb {
       width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 16px;
-      border: 3px solid rgba(255, 255, 255, 0.5);
-      cursor: pointer;
-      transition: border-color 0.3s ease, transform 0.25s ease;
+      height: 100%;
+      z-index: -2;
+      background: linear-gradient(45deg, #000000, #1a1a1a, #000000, #0a0a0a);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
     }
 
-    .photo-thumb:hover {
-      border-color: #ffcc00;
-      transform: scale(1.05);
-    }
-
-    /* Modal styling for full image */
-    .modal {
+    .bg-slideshow {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      width: 60vw;
-      max-width: 900px;
-      max-height: 80vh;
-      background: rgba(0, 0, 0, 0.85);
-      border-radius: 20px;
-      box-shadow: 0 0 40px rgba(255, 204, 0, 0.8);
-      opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      overflow: hidden;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal.active {
-      transform: translate(-50%, -50%) scale(1);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      filter: blur(20px) brightness(0.3);
+      transition: opacity 1.2s ease-in-out;
+      animation: zoomBackground 20s ease-in-out infinite;
       opacity: 1;
     }
 
-    .modal img {
-      max-width: 100%;
-      max-height: calc(80vh - 60px);
-      border-radius: 16px;
-      pointer-events: none;
+    @keyframes zoomBackground {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
     }
 
-    /* Close button for modal */
-    .close-btn {
-      align-self: flex-end;
-      margin: 10px 20px 0 0;
-      padding: 6px 16px;
-      font-size: 16px;
-      font-weight: bold;
-      background: transparent;
-      border: 2px solid #ffcc00;
-      border-radius: 8px;
-      color: #ffcc00;
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Cursor glow effect */
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+      z-index: 9999;
+      opacity: 0;
+    }
+
+    /* Particles */
+    .particle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Back Button */
+    .back-button {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateX(-4px);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Quick Links Sidebar */
+    .quick-links {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 200px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      z-index: 1000;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      animation: slideInRight 0.6s ease-out;
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .quick-links h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: rgba(255, 255, 255, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .quick-links ul {
+      list-style: none;
+    }
+
+    .quick-links li {
+      margin-bottom: 10px;
+    }
+
+    .quick-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      display: block;
+      padding: 6px 0;
+    }
+
+    .quick-links a:hover {
+      color: #fff;
+      transform: translateX(4px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 20px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .page-title {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Photo Grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      animation: fadeIn 1s ease-out 0.3s backwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .photo-item {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 16px;
       cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideUp 0.6s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .photo-item:nth-child(1) { animation-delay: 0.05s; }
+    .photo-item:nth-child(2) { animation-delay: 0.1s; }
+    .photo-item:nth-child(3) { animation-delay: 0.15s; }
+    .photo-item:nth-child(4) { animation-delay: 0.2s; }
+    .photo-item:nth-child(5) { animation-delay: 0.25s; }
+    .photo-item:nth-child(6) { animation-delay: 0.3s; }
+    .photo-item:nth-child(7) { animation-delay: 0.35s; }
+    .photo-item:nth-child(8) { animation-delay: 0.4s; }
+    .photo-item:nth-child(9) { animation-delay: 0.45s; }
+    .photo-item:nth-child(10) { animation-delay: 0.5s; }
+
+    .photo-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 16px 48px rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .photo-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .photo-item:hover .photo-thumb {
+      transform: scale(1.1);
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-image {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 80px rgba(255, 255, 255, 0.2);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
     .close-btn:hover {
-      background-color: #ffcc00;
-      color: #000;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
     }
 
-
-    .quick-links {
-  position: fixed;       /* Fix at viewport */
-  top: 60px;             /* Adjust top to align vertically */
-  right: 20px;           /* Right side, away from content */
-  width: 180px;
-  background: rgba(255 255 255 / 0.15);
-  backdrop-filter: blur(12px);
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  color: #fff;
-  font-family: Arial, sans-serif;
-  z-index: 9999;         /* Very high to be on top */
-  pointer-events: auto;  /* Ensure clickable */
-}
-
-
-.quick-links h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  color: #fba300;
-}
-
-.quick-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.quick-links li {
-  margin-bottom: 10px;
-}
-
-.quick-links a {
-  color: #ddd;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  font-weight: bold;
-}
-
-.quick-links a:hover {
-  color: #ffcc00;
-  text-decoration: underline;
-}
-
-
-footer {
+    /* Footer */
+    footer {
       text-align: center;
-      color: #ffffff;
-      position: relative;
-      top: -20px;
-      bottom: 0px;
-      width: 100%;
+      margin-top: 80px;
+      padding: 40px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeIn 2s ease-out 0.9s backwards;
     }
 
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .social-links a {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .social-links a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+    }
+
+    .social-links img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .quick-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 80px 20px 40px;
+      }
+
+      .back-button {
+        top: 16px;
+        left: 16px;
+        padding: 10px 18px;
+        font-size: 0.9rem;
+      }
+
+      .page-title {
+        font-size: 1.8rem;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+      }
+
+      .close-btn {
+        top: -40px;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
   </style>
-
 </head>
-
-
-
 <body>
-    
-
-    <a href="index.html" class="back-button">&#8592; Home</a>
-
-<div class="quick-links">
-  <h3>Quick Links</h3>
-  <ul>
-    <li><a href="eng_projects.html">Engineering Projects</a></li>
-    <li><a href="video_editing.html">Video Editing</a></li>
-    <li><a href="career.html">Career</a></li>
-    <li><a href="gaming.html">Gaming</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</div>
-
-
-  <!-- Background slideshow container -->
+  <div class="gradient-bg"></div>
   <div class="bg-slideshow" style="background-image: url('photography/10.jpeg');"></div>
-  <div class="overlay"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  
+  <a href="index.html" class="back-button">
+    <span>←</span> Home
+  </a>
 
-  <!-- Gallery section -->
-  <section class="gallery-section">
-    <h1>Photography</h1>
+  <div class="quick-links">
+    <h3>Quick Links</h3>
+    <ul>
+      <li><a href="eng_projects.html">Engineering Projects</a></li>
+      <li><a href="video_editing.html">Video Editing</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">Photography</h1>
+    </header>
+
     <div class="photo-grid">
-      <img src="photography/1.jpeg" alt="Photo 1" class="photo-thumb" />
-      <img src="photography/2.jpeg" alt="Photo 2" class="photo-thumb" />
-      <img src="photography/3.jpeg" alt="Photo 3" class="photo-thumb" />
-      <img src="photography/4.jpeg" alt="Photo 4" class="photo-thumb" />
-      <img src="photography/5.jpeg" alt="Photo 5" class="photo-thumb" />
-      <img src="photography/6.jpeg" alt="Photo 6" class="photo-thumb" />
-      <img src="photography/7.jpeg" alt="Photo 7" class="photo-thumb" />
-      <img src="photography/8.jpeg" alt="Photo 8" class="photo-thumb" />
-      <img src="photography/9.jpeg" alt="Photo 9" class="photo-thumb" />
-      <img src="photography/10.jpeg" alt="Photo 10" class="photo-thumb" />
-      <img src="photography/11.jpeg" alt="Photo 11" class="photo-thumb" />
-      <img src="photography/12.jpeg" alt="Photo 12" class="photo-thumb" />
-      <img src="photography/13.jpeg" alt="Photo 13" class="photo-thumb" />
-      <img src="photography/14.jpeg" alt="Photo 14" class="photo-thumb" />
-      <img src="photography/15.jpeg" alt="Photo 15" class="photo-thumb" />
-      <img src="photography/16.jpeg" alt="Photo 16" class="photo-thumb" />
-      <img src="photography/17.jpeg" alt="Photo 17" class="photo-thumb" />
-      <img src="photography/18.jpeg" alt="Photo 18" class="photo-thumb" />
-      <img src="photography/19.jpeg" alt="Photo 19" class="photo-thumb" />
-      <img src="photography/20.jpeg" alt="Photo 20" class="photo-thumb" />
-      <!-- Add or remove images as needed -->
+      <div class="photo-item"><img src="photography/1.jpeg" alt="Photo 1" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/2.jpeg" alt="Photo 2" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/3.jpeg" alt="Photo 3" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/4.jpeg" alt="Photo 4" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/5.jpeg" alt="Photo 5" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/6.jpeg" alt="Photo 6" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/7.jpeg" alt="Photo 7" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/8.jpeg" alt="Photo 8" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/9.jpeg" alt="Photo 9" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/10.jpeg" alt="Photo 10" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/11.jpeg" alt="Photo 11" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/12.jpeg" alt="Photo 12" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/13.jpeg" alt="Photo 13" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/14.jpeg" alt="Photo 14" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/15.jpeg" alt="Photo 15" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/16.jpeg" alt="Photo 16" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/17.jpeg" alt="Photo 17" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/18.jpeg" alt="Photo 18" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/19.jpeg" alt="Photo 19" class="photo-thumb" /></div>
+      <div class="photo-item"><img src="photography/20.jpeg" alt="Photo 20" class="photo-thumb" /></div>
     </div>
-  </section>
 
-  <!-- Modal for showing full photo -->
+    <footer>
+      <div class="social-links">
+        <a href="https://www.instagram.com/hat7su.png" target="_blank" rel="noopener" aria-label="Instagram">
+          <img src="icons/insta.png" alt="Instagram" />
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal -->
   <div class="modal" id="photoModal">
-    <button class="close-btn" id="closeModal">&times; Close</button>
-    <img src="" alt="Full View" id="modalImage" />
+    <div class="modal-content">
+      <button class="close-btn" id="closeModal">✕ Close</button>
+      <img src="" alt="Full View" class="modal-image" id="modalImage" />
+    </div>
   </div>
 
   <script>
+    // Cursor glow effect
+    const cursorGlow = document.getElementById('cursorGlow');
+    let mouseX = 0, mouseY = 0;
+    let glowX = 0, glowY = 0;
 
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorGlow.style.opacity = '1';
+    });
 
+    document.addEventListener('mouseleave', () => {
+      cursorGlow.style.opacity = '0';
+    });
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const images = [
-        "photography/1.jpeg",
-        "photography/2.jpeg",
-        "photography/3.jpeg",
-        "photography/4.jpeg",
-        "photography/5.jpeg",
-        "photography/6.jpeg",
-        "photography/7.jpeg",
-        "photography/8.jpeg",
-        "photography/9.jpeg",
-        "photography/10.jpeg",
-        "photography/11.jpeg",
-        "photography/12.jpeg",
-        "photography/13.jpeg",
-        "photography/14.jpeg",
-        "photography/15.jpeg",
-        "photography/16.jpeg",
-        "photography/17.jpeg",
-        "photography/18.jpeg",
-        "photography/19.jpeg",
-        "photography/20.jpeg",
+    function animate() {
+      glowX += (mouseX - glowX) * 0.1;
+      glowY += (mouseY - glowY) * 0.1;
+      cursorGlow.style.left = glowX + 'px';
+      cursorGlow.style.top = glowY + 'px';
+      requestAnimationFrame(animate);
+    }
+    animate();
 
-      ];
+    // Particle system
+    const particles = [];
+    const particleCount = 80;
+    const repulsionRadius = 120;
+    const repulsionForce = 0.8;
 
-        // ✅ Preload images properly
-  images.forEach(src => {
-    const img = new Image();
-    img.src = src;
-  });
+    class Particle {
+      constructor() {
+        this.reset();
+        this.element = document.createElement('div');
+        this.element.className = 'particle';
+        document.body.appendChild(this.element);
+      }
 
-      let currentIndex = 0;
-      const bgSlideshow = document.querySelector(".bg-slideshow");
-      const modal = document.getElementById("photoModal");
-      const modalImage = document.getElementById("modalImage");
-      const closeModalBtn = document.getElementById("closeModal");
-      const thumbs = document.querySelectorAll(".photo-thumb");
+      reset() {
+        this.x = Math.random() * window.innerWidth;
+        this.y = Math.random() * window.innerHeight;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.opacity = 1;
+      }
 
-    function changeBackground() {
-  console.log("Changing background to img:", images[currentIndex]);
-  
-  bgSlideshow.style.opacity = 0;   // fade out
+      update() {
+        const dx = this.x - mouseX;
+        const dy = this.y - mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
-  setTimeout(() => {
-    bgSlideshow.style.backgroundImage = `url('${images[currentIndex]}')`;
-    currentIndex = (currentIndex + 1) % images.length;
-
-    bgSlideshow.style.opacity = 1; // fade in
-  }, 600);
-}
-
-
-
-
-      // Initialize background and start cycling every 2.5 seconds
-      changeBackground();
-      setInterval(changeBackground, 2500);
-
-      // Open modal on thumbnail click
-      thumbs.forEach((thumb) => {
-        thumb.addEventListener("click", () => {
-          modalImage.src = thumb.src;
-          modal.classList.add("active");
-          document.body.style.overflow = "hidden"; // disable background scroll
-        });
-      });
-
-      // Close modal on button click
-      closeModalBtn.addEventListener("click", () => {
-        modal.classList.remove("active");
-        document.body.style.overflow = "auto"; // re-enable scroll
-      });
-
-      // Close modal if clicking outside image
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          closeModalBtn.click();
+        if (distance < repulsionRadius) {
+          const force = (repulsionRadius - distance) / repulsionRadius;
+          const angle = Math.atan2(dy, dx);
+          this.vx += Math.cos(angle) * force * repulsionForce;
+          this.vy += Math.sin(angle) * force * repulsionForce;
         }
+
+        this.vx *= 0.95;
+        this.vy *= 0.95;
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0) this.x = window.innerWidth;
+        if (this.x > window.innerWidth) this.x = 0;
+        if (this.y < 0) this.y = window.innerHeight;
+        if (this.y > window.innerHeight) this.y = 0;
+
+        if (distance < repulsionRadius * 1.5) {
+          this.opacity = Math.max(0, (distance / (repulsionRadius * 1.5)));
+        } else {
+          this.opacity = Math.min(1, this.opacity + 0.02);
+        }
+
+        this.element.style.left = this.x + 'px';
+        this.element.style.top = this.y + 'px';
+        this.element.style.opacity = this.opacity;
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      particles.forEach(particle => particle.update());
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+      particles.forEach(particle => {
+        if (particle.x > window.innerWidth) particle.x = window.innerWidth;
+        if (particle.y > window.innerHeight) particle.y = window.innerHeight;
       });
     });
 
+    // Background slideshow
+    const images = [
+      "photography/1.jpeg", "photography/2.jpeg", "photography/3.jpeg",
+      "photography/4.jpeg", "photography/5.jpeg", "photography/6.jpeg",
+      "photography/7.jpeg", "photography/8.jpeg", "photography/9.jpeg",
+      "photography/10.jpeg", "photography/11.jpeg", "photography/12.jpeg",
+      "photography/13.jpeg", "photography/14.jpeg", "photography/15.jpeg",
+      "photography/16.jpeg", "photography/17.jpeg", "photography/18.jpeg",
+      "photography/19.jpeg", "photography/20.jpeg"
+    ];
+
+    images.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    let currentIndex = 0;
+    const bgSlideshow = document.querySelector(".bg-slideshow");
+
+    function changeBackground() {
+      bgSlideshow.style.opacity = 0;
+      setTimeout(() => {
+        bgSlideshow.style.backgroundImage = `url('${images[currentIndex]}')`;
+        currentIndex = (currentIndex + 1) % images.length;
+        bgSlideshow.style.opacity = 1;
+      }, 600);
+    }
+
+    changeBackground();
+    setInterval(changeBackground, 3000);
+
+    // Modal functionality
+    const modal = document.getElementById("photoModal");
+    const modalImage = document.getElementById("modalImage");
+    const closeModalBtn = document.getElementById("closeModal");
+    const photoItems = document.querySelectorAll(".photo-thumb");
+
+    photoItems.forEach((thumb) => {
+      thumb.addEventListener("click", () => {
+        modalImage.src = thumb.src;
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+      document.body.style.overflow = "auto";
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModalBtn.click();
+      }
+    });
   </script>
-
-   <footer>
-      <div class="social-links">
-        <a href="https://www.instagram.com/hat7su.png" target="_blank" rel="noopener">
-      <img src="icons/insta.png" alt="instagram" />
-        </a>
-    </div>
- </footer>
-
 </body>
-
 </html>

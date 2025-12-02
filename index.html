@@ -4,185 +4,499 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Subhas Rayala</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-
-
-    #bg-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 100vw;
-    min-height: 100vh;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    object-position: center center;
-    z-index: -1;
-    pointer-events: none; /* Prevents video from blocking clicks */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .content {
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Animated Gradient Background */
+    .gradient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(45deg, #000000, #1a1a1a, #000000, #0a0a0a);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    .gradient-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15), transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1), transparent 50%),
+                  radial-gradient(circle at 40% 20%, rgba(200, 200, 255, 0.1), transparent 50%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
       position: relative;
       z-index: 1;
-      color: white;
-      text-align: center;
-      padding: 2rem;
     }
 
-
-
-    h1 span.highlight_name {
-    font-weight: bold;
-    font-family: 'Hey Comic', cursive;
-    color: #f7d351;
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeInDown 1s ease-out;
     }
 
-    h1.h1_1 {
-      font-weight: bold;
-      font-family: 'Coolvetica', cursive;
-      text-align: center;
-      color: #ffffff;
-      background-color: #eae6da;
-      padding: 10px;
-      border-radius: 20px;
-      opacity: 100%;
-      transition: background-color 0.3s ease;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.18); /* semi-transparent white */
-      border-radius: 16px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
-      backdrop-filter: blur(12px);  /* frosted blur effect */
-      -webkit-backdrop-filter: blur(12px); 
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    h4.h4_1 {
-      text-align: center;
-      color: white;
-      font-family: 'Coolvetica Rg', Arial, sans-serif;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    h2.h2_1 {
-      font-weight: bold;
-      font-family: 'Hey Comic', cursive;
-      text-align: center;
-      color: #ffffff;
+    .hero-title {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding: 20px 30px;
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.4s ease;
     }
 
-    div.content {
-      width: 50%;
-      float: right;
+    .hero-title:hover {
+      box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                  0 0 40px rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
     }
-    
-footer {
-      text-align: center;
-      color: #ffffff;
+
+    .highlight-name {
+      background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
       position: relative;
-      top: 30px;
-      bottom: 0px;
-      width: 100%;
+      display: inline-block;
     }
 
-ul {
-  list-style: none;   /* Removes bullet points */
-  padding: 0;
-  margin: 0 auto; /* Center the list */
-  width: 200px;     /* Optional: set a fixed or max width */
-}
+    .subtitle {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      margin-bottom: 30px;
+      animation: fadeIn 1.5s ease-out 0.3s backwards;
+    }
 
-li {
-  margin-bottom: 15px;   /* Space between links */
-}
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 30px;
+      color: rgba(255, 255, 255, 0.9);
+      animation: fadeIn 1.5s ease-out 0.6s backwards;
+    }
 
-li a {
-  display: block;         /* Makes the whole link area clickable */
-  padding: 10px 15px;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  font-family: Arial, sans-serif;
-  transition: background-color 0.3s ease;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.18); /* semi-transparent white */
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
-  backdrop-filter: blur(12px);  /* frosted blur effect */
-  -webkit-backdrop-filter: blur(12px); /* for Safari browser */
-  transform: translateY(20px);
-  animation: fadeInUp 1s forwards;
-}
-@keyframes fadeInUp {
-    to {
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Navigation Cards */
+    nav {
+      margin: 40px 0;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-card a {
+      display: block;
+      padding: 28px 32px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.05rem;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideUp 0.6s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .nav-card:nth-child(1) a { animation-delay: 0.1s; }
+    .nav-card:nth-child(2) a { animation-delay: 0.2s; }
+    .nav-card:nth-child(3) a { animation-delay: 0.3s; }
+    .nav-card:nth-child(4) a { animation-delay: 0.4s; }
+    .nav-card:nth-child(5) a { animation-delay: 0.5s; }
+    .nav-card:nth-child(6) a { animation-delay: 0.6s; }
+
+    .nav-card a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
+                  rgba(255, 255, 255, 0.15) 0%, 
+                  transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .nav-card a:hover::before {
       opacity: 1;
-      transform: translateY(0);
     }
-  }
 
-  li:nth-child(1) a { animation-delay: 0s; }
-  li:nth-child(2) a { animation-delay: 0.3s; }
-  li:nth-child(3) a { animation-delay: 0.6s; }
-  li:nth-child(4) a { animation-delay: 0.9s; }
-  li:nth-child(5) a { animation-delay: 1.2s; }
-  li:nth-child(6) a { animation-delay: 1.5s; }
-  
-li a:hover {
-  background-color: #f3991c;
-}
+    .nav-card a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(255, 255, 255, 0.1),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
 
-.content {
-  opacity: 0;
-  animation: fadeIn 2s ease-in forwards;
-}
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      padding: 40px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeIn 2s ease-out 0.9s backwards;
+    }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
 
+    .social-links a {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
 
+    .social-links a::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .social-links a:hover::before {
+      opacity: 1;
+    }
+
+    .social-links a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+    }
+
+    .social-links img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.3s ease;
+    }
+
+    .social-links a:hover img {
+      transform: scale(1.1);
+    }
+
+    footer p {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      .nav-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+        padding: 16px 24px;
+      }
+
+      .subtitle {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Cursor glow effect */
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+      z-index: 9999;
+      opacity: 0;
+    }
+
+    /* Particles */
+    .particle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
   </style>
 </head>
-<main>
 <body>
-  <video autoplay muted loop id="bg-video">
-    <source src="videos/bgvid2.mp4" type="video/mp4" />
-    Your browser does not support HTML5 video.
-  </video>
-
-  <div class="content">
+  <div class="gradient-bg"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  
+  <div class="container">
     <header>
-      <h1 class="h1_1">Hi, Welcome To <span class="highlight_name">Subhas Rayala</span> Portfolio</h1>
-      <h4 class="h4_1">Chemical Engineer, Data Enthusiast, Video Editor, Gamer, Photographer, Otaku</h4>
-      <h2 class="h2_1">About Me 👇</h2>
-      <nav>
-        <ul>
-          <li><a href="career.html">Career</a></li>
-          <li><a href="eng_projects.html">Engineering Projects</a></li>
-            <li><a href="video_editing.html">Video Editing</a></li>
-            <li><a href="photography.html">Photography</a></li>
-            <li><a href="gaming.html">Gaming</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+      <h1 class="hero-title">
+        Hi, Welcome To <span class="highlight-name">Subhas Rayala</span> Portfolio
+      </h1>
+      <p class="subtitle">
+        Chemical Engineer • Data Enthusiast • Video Editor • Gamer • Photographer • Otaku
+      </p>
+      <h2 class="section-title">About Me 👇</h2>
     </header>
-    <main>
-    
-    </main>
+
+    <nav>
+      <ul class="nav-grid">
+        <li class="nav-card"><a href="career.html">Career</a></li>
+        <li class="nav-card"><a href="eng_projects.html">Engineering Projects</a></li>
+        <li class="nav-card"><a href="video_editing.html">Video Editing</a></li>
+        <li class="nav-card"><a href="photography.html">Photography</a></li>
+        <li class="nav-card"><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
 
     <footer>
       <div class="social-links">
-    <a href="https://github.com/SubhasRayala" target="_blank" rel="noopener">
-      <img src="icons/git.png" alt="github-icon" />
-    </a>
-    <a href="https://www.linkedin.com/in/subhasrayala/" target="_blank" rel="noopener">
-      <img src="icons/linkedin.png" alt="linkedin-icon" />
-    </a>
-    <a href="https://www.youtube.com/@hat7su" target="_blank" rel="noopener">
-      <img src="icons/youtube.png" alt="YouTube" />
-    </a>
-  </div>
+        <a href="https://github.com/SubhasRayala" target="_blank" rel="noopener" aria-label="GitHub">
+          <img src="icons/git.png" alt="GitHub" />
+        </a>
+        <a href="https://www.linkedin.com/in/subhasrayala/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img src="icons/linkedin.png" alt="LinkedIn" />
+        </a>
+        <a href="https://www.youtube.com/@hat7su" target="_blank" rel="noopener" aria-label="YouTube">
+          <img src="icons/youtube.png" alt="YouTube" />
+        </a>
+      </div>
       <p>&copy; 2025, Subhas Rayala</p>
     </footer>
   </div>
+
+  <script>
+    // Cursor glow effect
+    const cursorGlow = document.getElementById('cursorGlow');
+    let mouseX = 0, mouseY = 0;
+    let glowX = 0, glowY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorGlow.style.opacity = '1';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursorGlow.style.opacity = '0';
+    });
+
+    function animate() {
+      glowX += (mouseX - glowX) * 0.1;
+      glowY += (mouseY - glowY) * 0.1;
+      cursorGlow.style.left = glowX + 'px';
+      cursorGlow.style.top = glowY + 'px';
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Particle system with anti-gravity effect
+    const particles = [];
+    const particleCount = 80;
+    const repulsionRadius = 120;
+    const repulsionForce = 0.8;
+
+    class Particle {
+      constructor() {
+        this.reset();
+        this.element = document.createElement('div');
+        this.element.className = 'particle';
+        document.body.appendChild(this.element);
+      }
+
+      reset() {
+        this.x = Math.random() * window.innerWidth;
+        this.y = Math.random() * window.innerHeight;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.opacity = 1;
+        this.life = 1;
+      }
+
+      update() {
+        // Calculate distance from mouse
+        const dx = this.x - mouseX;
+        const dy = this.y - mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // Anti-gravity repulsion effect
+        if (distance < repulsionRadius) {
+          const force = (repulsionRadius - distance) / repulsionRadius;
+          const angle = Math.atan2(dy, dx);
+          this.vx += Math.cos(angle) * force * repulsionForce;
+          this.vy += Math.sin(angle) * force * repulsionForce;
+        }
+
+        // Apply velocity with damping
+        this.vx *= 0.95;
+        this.vy *= 0.95;
+
+        // Update position
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Boundary wrap
+        if (this.x < 0) this.x = window.innerWidth;
+        if (this.x > window.innerWidth) this.x = 0;
+        if (this.y < 0) this.y = window.innerHeight;
+        if (this.y > window.innerHeight) this.y = 0;
+
+        // Calculate opacity based on distance from mouse (fade effect)
+        if (distance < repulsionRadius * 1.5) {
+          this.opacity = Math.max(0, (distance / (repulsionRadius * 1.5)));
+        } else {
+          this.opacity = Math.min(1, this.opacity + 0.02);
+        }
+
+        // Update element
+        this.element.style.left = this.x + 'px';
+        this.element.style.top = this.y + 'px';
+        this.element.style.opacity = this.opacity;
+      }
+    }
+
+    // Create particles
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    // Animate particles
+    function animateParticles() {
+      particles.forEach(particle => particle.update());
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      particles.forEach(particle => {
+        if (particle.x > window.innerWidth) particle.x = window.innerWidth;
+        if (particle.y > window.innerHeight) particle.y = window.innerHeight;
+      });
+    });
+
+    // Glow effect on nav cards based on mouse position
+    const navCards = document.querySelectorAll('.nav-card a');
+    navCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--x', x + '%');
+        card.style.setProperty('--y', y + '%');
+      });
+    });
+  </script>
 </body>
 </html>
