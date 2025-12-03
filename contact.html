@@ -74,13 +74,15 @@
     /* Particles */
     .particle {
       position: fixed;
-      width: 4px;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.8);
+      width: 3px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9998;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
+                  0 0 25px rgba(255, 255, 255, 0.4);
+      opacity: 0;
     }
 
     /* Back Button */
@@ -517,65 +519,47 @@
     }
     animate();
 
-    // Particle system
+    // Particle system - only around mouse pointer
     const particles = [];
-    const particleCount = 80;
-    const repulsionRadius = 120;
-    const repulsionForce = 0.8;
+    const particleCount = 25;
+    const particleOrbitRadius = 80;
 
     class Particle {
-      constructor() {
-        this.reset();
+      constructor(index) {
+        this.index = index;
+        this.angle = (Math.PI * 2 * index) / particleCount;
+        this.radius = Math.random() * 40 + 40;
+        this.speed = Math.random() * 0.02 + 0.01;
         this.element = document.createElement('div');
         this.element.className = 'particle';
         document.body.appendChild(this.element);
-      }
-
-      reset() {
-        this.x = Math.random() * window.innerWidth;
-        this.y = Math.random() * window.innerHeight;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.opacity = 1;
+        this.offsetX = (Math.random() - 0.5) * 30;
+        this.offsetY = (Math.random() - 0.5) * 30;
       }
 
       update() {
-        const dx = this.x - mouseX;
-        const dy = this.y - mouseY;
+        // Orbit around mouse position
+        this.angle += this.speed;
+        
+        const targetX = mouseX + Math.cos(this.angle) * this.radius + this.offsetX;
+        const targetY = mouseY + Math.sin(this.angle) * this.radius + this.offsetY;
+
+        // Calculate distance from mouse to fade particles
+        const dx = targetX - mouseX;
+        const dy = targetY - mouseY;
         const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Fade based on distance from mouse
+        const opacity = Math.max(0, Math.min(1, 1 - (distance - 40) / 60));
 
-        if (distance < repulsionRadius) {
-          const force = (repulsionRadius - distance) / repulsionRadius;
-          const angle = Math.atan2(dy, dx);
-          this.vx += Math.cos(angle) * force * repulsionForce;
-          this.vy += Math.sin(angle) * force * repulsionForce;
-        }
-
-        this.vx *= 0.95;
-        this.vy *= 0.95;
-
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0) this.x = window.innerWidth;
-        if (this.x > window.innerWidth) this.x = 0;
-        if (this.y < 0) this.y = window.innerHeight;
-        if (this.y > window.innerHeight) this.y = 0;
-
-        if (distance < repulsionRadius * 1.5) {
-          this.opacity = Math.max(0, (distance / (repulsionRadius * 1.5)));
-        } else {
-          this.opacity = Math.min(1, this.opacity + 0.02);
-        }
-
-        this.element.style.left = this.x + 'px';
-        this.element.style.top = this.y + 'px';
-        this.element.style.opacity = this.opacity;
+        this.element.style.left = targetX + 'px';
+        this.element.style.top = targetY + 'px';
+        this.element.style.opacity = opacity;
       }
     }
 
     for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
+      particles.push(new Particle(i));
     }
 
     function animateParticles() {
@@ -583,13 +567,6 @@
       requestAnimationFrame(animateParticles);
     }
     animateParticles();
-
-    window.addEventListener('resize', () => {
-      particles.forEach(particle => {
-        if (particle.x > window.innerWidth) particle.x = window.innerWidth;
-        if (particle.y > window.innerHeight) particle.y = window.innerHeight;
-      });
-    });
 
     // Glow effect on sections
     const allSections = document.querySelectorAll('.section');
