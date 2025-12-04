@@ -36,10 +36,10 @@
     .gradient-bg::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: -10%;
+      left: -10%;
+      right: -10%;
+      bottom: -10%;
       background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15), transparent 50%),
                   radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1), transparent 50%),
                   radial-gradient(circle at 40% 20%, rgba(200, 200, 255, 0.1), transparent 50%);
@@ -53,9 +53,9 @@
     }
 
     @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -30px) scale(1.1); }
-      66% { transform: translate(-20px, 20px) scale(0.9); }
+      0%, 100% { transform: translate(0, 0) }
+      33% { transform: translate(20px, -20px) }
+      66% { transform: translate(-15px, 15px) }
     }
 
     /* Cursor glow effect */
