@@ -107,8 +107,8 @@
     }
 
     .back-button:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.25);
+      background: rgb(255, 255, 255, 0.25);
+      border-color: rgb(243, 97, 29);
       transform: translateX(-4px);
       box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
     }
@@ -168,7 +168,7 @@
     }
 
     .quick-links a:hover {
-      color: #fff;
+      color: rgb(243, 97, 29);
       transform: translateX(4px);
     }
 
@@ -205,7 +205,7 @@
 
     .download-btn:hover {
       background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.3);
+      border-color: rgb(243, 97, 29);
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
     }
@@ -217,6 +217,41 @@
     .download-icon {
       font-size: 1.2rem;
     }
+
+
+    .download-btn[data-title]:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: 130%;
+  right: 10;
+  min-width: 140px;
+  padding: 8px 12px;
+  background: rgb(243, 97, 29);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 1001;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  animation: tooltipSlide 0.2s ease-out;
+}
+
+@keyframes tooltipSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
     /* Container */
     .container {
@@ -552,9 +587,9 @@
 
     <!-- Resume Download Button -->
   <div class="resume-download">
-    <a href="Resume/Subhas_Rayala_Resume.pdf" class="download-btn" download>
+    <a href="Resume/Subhas_Rayala_Resume.pdf" class="download-btn" download data-title="Download Resume">
       <span class="download-icon">⬇</span>
-      <span>Download Resume</span>
+      <span>Resume</span>
     </a>
   </div>
 
