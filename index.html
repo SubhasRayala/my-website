@@ -138,6 +138,198 @@
       transform: translateY(-2px);
     }
 
+      /* Fullscreen Modal */
+    .fullscreen-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
+      z-index: 10000;
+      display: none;
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fullscreen-modal.active {
+      display: flex;
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.98);
+      backdrop-filter: blur(20px);
+    }
+
+    .modal-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      transform: scale(0.8);
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+    }
+
+    .fullscreen-modal.active .modal-content {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .typewriter-container {
+      width: 100%;
+      height: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transform: translateY(-30px);
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+    }
+
+    .fullscreen-modal.active .typewriter-container {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .typewriter-text {
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    .cursor-blink {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background: #fff;
+      margin-left: 5px;
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .profile-container {
+      width: 100%;
+      height: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transform: translateY(30px);
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+    }
+
+    .fullscreen-modal.active .profile-container {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .profile-image-wrapper {
+      position: relative;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      padding: 8px;
+      background: linear-gradient(135deg, 
+        rgba(163, 163, 163, 0.8) 0%, 
+        rgba(255, 255, 255, 0.6) 50%, 
+        rgba(161, 159, 158, 0.8) 100%);
+      animation: pulse 2s ease-in-out infinite;
+      box-shadow: 0 0 40px rgba(198, 197, 196, 0.4),
+                  0 0 80px rgba(193, 191, 190, 0.2),
+                  inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    @keyframes rotateBorder {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { 
+        box-shadow: 0 0 40px rgba(217, 216, 215, 0.4),
+                    0 0 80px rgba(203, 202, 201, 0.2),
+                    inset 0 0 20px rgba(255, 255, 255, 0.1);
+      }
+      50% { 
+        box-shadow: 0 0 60px rgba(219, 217, 216, 0.6),
+                    0 0 120px rgba(213, 211, 210, 0.3),
+                    inset 0 0 30px rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(0, 0, 0, 0.8);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10001;
+    }
+
+    .close-modal:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    .close-modal::before,
+    .close-modal::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+    }
+
+    .close-modal::before {
+      transform: rotate(45deg);
+    }
+
+    .close-modal::after {
+      transform: rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+      .profile-image-wrapper {
+        width: 250px;
+        height: 250px;
+      }
+
+      .typewriter-text {
+        font-size: 2rem;
+      }
+    }
+
     .highlight-name {
       background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
       -webkit-background-clip: text;
@@ -342,6 +534,22 @@
   <div class="gradient-bg"></div>
   <div class="cursor-glow" id="cursorGlow"></div>
   
+
+  <!-- Fullscreen Modal -->
+  <div class="fullscreen-modal" id="fullscreenModal">
+    <div class="close-modal" id="closeModal"></div>
+    <div class="modal-content">
+      <div class="typewriter-container">
+        <div class="typewriter-text" id="typewriterText"></div>
+      </div>
+      <div class="profile-container">
+        <div class="profile-image-wrapper">
+          <img src="my pic/1.jpeg" alt="Subhas Rayala" class="profile-image" id="profileImage">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <header>
       <h1 class="hero-title">
@@ -380,6 +588,71 @@
   </div>
 
   <script>
+    
+      // Typewriter effect
+    const fullText = "Hi, Welcome To Subhas Rayala Portfolio";
+    let textIndex = 0;
+    let isDeleting = false;
+    let typewriterTimeout;
+
+    function typeWriter() {
+      const typewriterElement = document.getElementById('typewriterText');
+      
+      if (!isDeleting && textIndex <= fullText.length) {
+        typewriterElement.innerHTML = fullText.substring(0, textIndex) + '<span class="cursor-blink"></span>';
+        textIndex++;
+        typewriterTimeout = setTimeout(typeWriter, 100);
+      } else if (!isDeleting && textIndex > fullText.length) {
+        setTimeout(() => {
+          isDeleting = true;
+          typeWriter();
+        }, 2000);
+      } else if (isDeleting && textIndex >= 0) {
+        typewriterElement.innerHTML = fullText.substring(0, textIndex) + '<span class="cursor-blink"></span>';
+        textIndex--;
+        typewriterTimeout = setTimeout(typeWriter, 50);
+      } else if (isDeleting && textIndex < 0) {
+        isDeleting = false;
+        textIndex = 0;
+        setTimeout(typeWriter, 500);
+      }
+    }
+
+    // Modal functionality
+    const heroTitle = document.querySelector('.hero-title');
+    const modal = document.getElementById('fullscreenModal');
+    const closeBtn = document.getElementById('closeModal');
+
+    heroTitle.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      setTimeout(() => {
+        modal.classList.add('active');
+      }, 10);
+      textIndex = 0;
+      isDeleting = false;
+      setTimeout(() => {
+        typeWriter();
+      }, 800);
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+      clearTimeout(typewriterTimeout);
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 600);
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        clearTimeout(typewriterTimeout);
+        setTimeout(() => {
+          modal.style.display = 'none';
+        }, 600);
+      }
+    });
+
     // Cursor glow effect
     const cursorGlow = document.getElementById('cursorGlow');
     let mouseX = 0, mouseY = 0;
