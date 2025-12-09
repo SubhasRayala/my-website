@@ -139,7 +139,7 @@
       transform: translateY(-2px);
     }
 
-      /* Fullscreen Modal */
+    /* Fullscreen Modal */
     .fullscreen-modal {
       position: fixed;
       top: 0;
@@ -287,7 +287,7 @@
       right: 30px;
       width: 50px;
       height: 50px;
-      background: rgba(244, 242, 241, 0.1);
+      background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 50%;
       display: flex;
@@ -299,7 +299,7 @@
     }
 
     .close-modal:hover {
-      background: rgba(239, 91, 37, 0.866);
+      background: rgba(255, 255, 255, 0.2);
       transform: rotate(90deg) scale(1.1);
     }
 
@@ -321,7 +321,7 @@
     }
 
     .highlight-name {
-      background: linear-gradient(135deg, #f97a0a 0%, #e0e0e0 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -420,7 +420,6 @@
     .nav-card a:hover::before {
       opacity: 1;
     }
-    
 
     .nav-card a:hover {
       background: rgba(255, 255, 255, 0.12);
@@ -429,7 +428,6 @@
       box-shadow: 0 12px 40px rgba(255, 255, 255, 0.1),
                   inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
-    
 
     /* Footer */
     footer {
@@ -657,6 +655,7 @@
       pointer-events: all;
       transform: translateY(-50%) translateX(0);
     }
+
     /* Close button for bot panel */
     .bot-panel-close {
       position: absolute;
@@ -676,7 +675,7 @@
     }
 
     .bot-panel-close:hover {
-      background: rgba(239, 91, 37, 0.866);
+      background: rgba(255, 255, 255, 0.2);
       transform: rotate(90deg) scale(1.1);
     }
 
@@ -724,7 +723,7 @@
 
     .bot-link-item:hover {
       background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(239, 91, 37, 0.866);
+      border-color: rgba(255, 255, 255, 0.3);
       transform: translateX(-4px);
       box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
     }
@@ -737,13 +736,12 @@
       display: block;
     }
 
-
     .bot-link-desc {
       font-size: 0.85rem;
       color: rgba(255, 255, 255, 0.6);
       line-height: 1.4;
     }
-    
+
     /* Responsive */
     @media (max-width: 768px) {
       .container {
@@ -782,8 +780,7 @@
   <div class="gradient-bg"></div>
   <div class="cursor-glow" id="cursorGlow"></div>
   
-   
-   <!-- 3D Bot Container -->
+  <!-- 3D Bot Container -->
   <div class="bot-container">
     <div class="bot-wrapper">
       <div class="bot-3d">
@@ -803,17 +800,15 @@
       <!-- Links Panel -->
       <div class="bot-links-panel" id="botLinksPanel">
         <div class="bot-panel-close" id="botPanelClose"></div>
-        <h3>ML Bots</h3>
+        <h3>My AI Projects</h3>
         <a href="https://my-website-predbot.streamlit.app/" target="_blank" class="bot-link-item">
-          <span class="bot-link-title">PredIT Bot</span>
-          <span class="bot-link-desc">“Upload your dataset, select a model, train it, and generate predictions.”
-</span>
+          <span class="bot-link-title">ML Predictor Bot</span>
+          <span class="bot-link-desc">Machine learning model for predictions with interactive visualizations and real-time analysis</span>
         </a>
         <!-- Add more bot links here in the future -->
       </div>
     </div>
   </div>
-
 
   <!-- Fullscreen Modal -->
   <div class="fullscreen-modal" id="fullscreenModal">
@@ -868,9 +863,8 @@
   </div>
 
   <script>
-    
-      // Typewriter effect
-    const fullText = "Hi, Welcome To My Portfolio!";
+    // Typewriter effect
+    const fullText = "Hi, Welcome To Subhas Rayala Portfolio";
     let textIndex = 0;
     let isDeleting = false;
     let typewriterTimeout;
@@ -1017,7 +1011,7 @@
       });
     });
 
-// Bot popup toggle functionality
+    // Bot popup toggle functionality
     const botWrapper = document.querySelector('.bot-wrapper');
     const botLinksPanel = document.getElementById('botLinksPanel');
     const botPanelClose = document.getElementById('botPanelClose');
