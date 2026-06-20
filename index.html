@@ -96,8 +96,7 @@
 
     /* Header */
     header {
-      text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 70px;
       animation: fadeInDown 1s ease-out;
     }
 
@@ -112,31 +111,189 @@
       }
     }
 
-    .hero-title {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      font-weight: 700;
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      padding: 20px 30px;
-      border-radius: 24px;
-      backdrop-filter: blur(20px);
-      background-color: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      transition: all 0.4s ease;
-      cursor: pointer;
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      align-items: center;
+      gap: 40px;
     }
 
-    .hero-title:hover {
-      box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                  0 0 40px rgba(255, 255, 255, 0.1);
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgb(243, 97, 29);
+      box-shadow: 0 0 10px rgba(243, 97, 29, 0.8);
+      animation: pulse-antenna 2s ease-in-out infinite;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      cursor: pointer;
+      display: inline-block;
+      color: #fff;
+    }
+
+    .hero-title .static-word {
+      display: block;
+    }
+
+    .hero-title .highlight-name {
+      display: block;
+      position: relative;
+    }
+
+    .hero-title .tap-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      color: rgba(255, 255, 255, 0.35);
+      vertical-align: middle;
+      margin-left: 14px;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero-title:hover .tap-hint {
+      color: rgba(255, 255, 255, 0.7);
+      transform: translateX(3px);
+    }
+
+    .role-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .role-tag {
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 7px 16px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .role-tag:hover {
+      border-color: rgba(243, 97, 29, 0.6);
+      color: #fff;
       transform: translateY(-2px);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 100px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .cta-btn.primary {
+      background: linear-gradient(135deg, rgba(239, 91, 37, 0.95), rgba(200, 60, 10, 0.95));
+      color: #fff;
+      border: 1px solid rgba(239, 91, 37, 0.5);
+      box-shadow: 0 4px 20px rgba(239, 91, 37, 0.3);
+    }
+
+    .cta-btn.primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(239, 91, 37, 0.5);
+    }
+
+    .cta-btn.secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    .cta-btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .portrait-frame {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      margin: 0 auto;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      padding: 6px;
+      background: linear-gradient(135deg,
+        rgba(243, 97, 29, 0.6) 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(161, 159, 158, 0.6) 100%);
+      cursor: pointer;
+      animation: pulse 3s ease-in-out infinite;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .portrait-frame:hover {
+      transform: scale(1.04);
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid rgba(0, 0, 0, 0.85);
+      display: block;
+    }
+
+    .portrait-ring-label {
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 5px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+      backdrop-filter: blur(10px);
     }
 
       /* Fullscreen Modal */
@@ -326,25 +483,36 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       font-weight: 800;
-      position: relative;
-      display: inline-block;
     }
 
     .subtitle {
-      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
       font-weight: 400;
-      color: rgba(255, 255, 255, 0.7);
-      line-height: 1.6;
-      margin-bottom: 30px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 28px;
       animation: fadeIn 1.5s ease-out 0.3s backwards;
     }
 
     .section-title {
-      font-size: 1.3rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      margin-bottom: 30px;
-      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: rgba(255, 255, 255, 0.45);
       animation: fadeIn 1.5s ease-out 0.6s backwards;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.15), transparent);
     }
 
     @keyframes fadeIn {
@@ -354,13 +522,13 @@
 
     /* Navigation Cards */
     nav {
-      margin: 40px 0;
+      margin: 0 0 50px;
     }
 
     .nav-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: 1fr;
+      gap: 14px;
       list-style: none;
     }
 
@@ -370,21 +538,20 @@
     }
 
     .nav-card a {
-      display: block;
-      padding: 28px 32px;
-      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding: 22px 26px;
+      background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(20px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       text-decoration: none;
       color: #fff;
-      font-weight: 500;
-      font-size: 1.05rem;
-      text-align: center;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(24px);
       animation: slideUp 0.6s ease-out forwards;
     }
 
@@ -410,7 +577,7 @@
       right: 0;
       bottom: 0;
       background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
-                  rgba(255, 255, 255, 0.15) 0%, 
+                  rgba(255, 255, 255, 0.12) 0%, 
                   transparent 50%);
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -420,16 +587,64 @@
     .nav-card a:hover::before {
       opacity: 1;
     }
-    
 
     .nav-card a:hover {
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.09);
       border-color: rgb(243, 97, 29);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(255, 255, 255, 0.1),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transform: translateX(6px);
+      box-shadow: 0 12px 40px rgba(255, 255, 255, 0.08),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
-    
+
+    .nav-icon {
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+      transition: all 0.4s ease;
+    }
+
+    .nav-card a:hover .nav-icon {
+      background: rgba(243, 97, 29, 0.18);
+      border-color: rgba(243, 97, 29, 0.5);
+      color: #fff;
+    }
+
+    .nav-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .nav-card-title {
+      display: block;
+      font-weight: 600;
+      font-size: 1.02rem;
+      margin-bottom: 3px;
+    }
+
+    .nav-card-desc {
+      display: block;
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.4;
+    }
+
+    .nav-arrow {
+      flex-shrink: 0;
+      color: rgba(255, 255, 255, 0.3);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-card a:hover .nav-arrow {
+      color: rgb(243, 97, 29);
+      transform: translateX(4px);
+    }
 
     /* Footer */
     footer {
@@ -503,10 +718,62 @@
     .bot-container {
       position: fixed;
       right: 30px;
-      top: 50%;
+      top: calc(50% - 115px);
       transform: translateY(-50%);
       z-index: 9999;
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Typewriter tooltip shared */
+    .icon-tooltip {
+      position: absolute;
+      right: 95px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(10, 10, 10, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 8px 14px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .icon-tooltip::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      background: rgba(10, 10, 10, 0.92);
+      border-right: 1px solid rgba(255,255,255,0.12);
+      border-top: 1px solid rgba(255,255,255,0.12);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .icon-tooltip.visible {
+      opacity: 1;
+    }
+
+    .icon-tooltip-text {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 0.01em;
+    }
+
+    .icon-tooltip-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 0.85em;
+      background: rgba(239, 91, 37, 0.9);
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 0.7s infinite;
     }
 
     .bot-wrapper {
@@ -744,26 +1011,241 @@
       line-height: 1.4;
     }
     
+    /* Desktop App Icon */
+    .app-icon-container {
+      position: fixed;
+      right: 30px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .app-icon-wrapper {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .app-icon-wrapper img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .app-icon-container:hover .app-icon-wrapper {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(239, 91, 37, 0.8);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(255, 255, 255, 0.1);
+    }
+
+    .app-icon-container:hover .app-icon-wrapper img {
+      transform: scale(1.1);
+    }
+
+    .app-icon-label {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      font-weight: 500;
+      line-height: 1.2;
+      max-width: 80px;
+    }
+
+    /* Download Modal */
+    .download-modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(12px);
+      z-index: 10002;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .download-modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .download-modal-box {
+      background: rgba(15, 15, 15, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transform: scale(0.85);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .download-modal-overlay.active .download-modal-box {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .download-modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 32px; height: 32px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .download-modal-close:hover {
+      background: rgba(239, 91, 37, 0.866);
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    .download-modal-close::before,
+    .download-modal-close::after {
+      content: '';
+      position: absolute;
+      width: 14px; height: 2px;
+      background: #fff;
+    }
+
+    .download-modal-close::before { transform: rotate(45deg); }
+    .download-modal-close::after { transform: rotate(-45deg); }
+
+    .download-modal-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .download-modal-logo img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+
+    .download-modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .download-modal-subtitle {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, rgba(239, 91, 37, 0.9), rgba(200, 60, 10, 0.9));
+      border: 1px solid rgba(239, 91, 37, 0.5);
+      border-radius: 14px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 20px rgba(239, 91, 37, 0.3);
+    }
+
+    .download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(239, 91, 37, 0.5);
+      background: linear-gradient(135deg, rgba(239, 91, 37, 1), rgba(200, 60, 10, 1));
+    }
+
+    .download-btn svg {
+      flex-shrink: 0;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .container {
         padding: 40px 20px;
       }
 
-      .nav-grid {
+      .intro-grid {
         grid-template-columns: 1fr;
+        text-align: center;
       }
 
-      .hero-title {
-        font-size: 2rem;
-        padding: 16px 24px;
+      .intro-grid > div:first-child {
+        order: 2;
+      }
+
+      .portrait-frame {
+        order: 1;
+        max-width: 200px;
+        margin-bottom: 10px;
+      }
+
+      .role-tags,
+      .cta-row {
+        justify-content: center;
       }
 
       .subtitle {
-        font-size: 0.95rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .nav-card a {
+        padding: 18px 18px;
+        gap: 16px;
+      }
+
+      .nav-icon {
+        width: 40px;
+        height: 40px;
       }
 
       .bot-container {
+        display: none;
+      }
+
+      .app-icon-container {
         display: none;
       }
 
@@ -786,6 +1268,8 @@
    <!-- 3D Bot Container -->
   <div class="bot-container">
     <div class="bot-wrapper">
+      <!-- ML Bot typewriter tooltip -->
+      <div class="icon-tooltip" id="botTooltip"><span class="icon-tooltip-text" id="botTooltipText"></span><span class="icon-tooltip-cursor"></span></div>
       <div class="bot-3d">
         <div class="bot-head">
           <div class="bot-antenna"></div>
@@ -814,8 +1298,36 @@
     </div>
   </div>
 
+  <!-- Desktop App Icon (below ML Bot) -->
+  <div class="app-icon-container" id="appIconContainer" style="top: calc(50% + 115px);">
+    <!-- App typewriter tooltip -->
+    <div class="icon-tooltip" id="appTooltip"><span class="icon-tooltip-text" id="appTooltipText"></span><span class="icon-tooltip-cursor"></span></div>
+    <div class="app-icon-wrapper">
+      <!-- Replace 'icons/app-logo.png' with your actual logo file path -->
+      <img src="icons/app-logo.png" alt="Data Analytics Platform" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'rgba(255,255,255,0.8)\' stroke-width=\'1.5\'><rect x=\'2\' y=\'3\' width=\'20\' height=\'14\' rx=\'2\'/><polyline points=\'8 21 12 17 16 21\'/><line x1=\'12\' y1=\'17\' x2=\'12\' y2=\'21\'/><polyline points=\'6 9 10 13 14 9 18 11\'/></svg>';" />
+    </div>
+    <span class="app-icon-label">Analytics<br>Platform</span>
+  </div>
 
-  <!-- Fullscreen Modal -->
+  <!-- Download Modal -->
+  <div class="download-modal-overlay" id="downloadModal">
+    <div class="download-modal-box">
+      <div class="download-modal-close" id="downloadModalClose"></div>
+      <div class="download-modal-logo">
+        <img src="icons/app-logo.png" alt="Data Analytics Platform" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'rgba(255,255,255,0.8)\' stroke-width=\'1.5\'><rect x=\'2\' y=\'3\' width=\'20\' height=\'14\' rx=\'2\'/><polyline points=\'8 21 12 17 16 21\'/><line x1=\'12\' y1=\'17\' x2=\'12\' y2=\'21\'/><polyline points=\'6 9 10 13 14 9 18 11\'/></svg>';" />
+      </div>
+      <div class="download-modal-title">Data Analytics Platform</div>
+      <div class="download-modal-subtitle">A powerful desktop application for data analysis.<br>Windows only • .exe installer</div>
+      <a href="https://drive.google.com/file/d/1LF8KDVOwV8n1FEhTu8zDsBRru78IT_QO/view?usp=sharing" target="_blank" class="download-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download (.exe)
+      </a>
+    </div>
+  </div>
   <div class="fullscreen-modal" id="fullscreenModal">
     <div class="close-modal" id="closeModal"></div>
     <div class="modal-content">
@@ -832,22 +1344,100 @@
 
   <div class="container">
     <header>
-      <h1 class="hero-title">
-        Hi, Welcome To <span class="highlight-name">Subhas Rayala</span> Portfolio
-      </h1>
-      <p class="subtitle">
-        Chemical Engineer • Data Enthusiast • Video Editor • Gamer • Photographer • Otaku
-      </p>
-      <h2 class="section-title">About Me 👇</h2>
+      <div class="intro-grid">
+        <div>
+          <span class="eyebrow">Available for opportunities</span>
+          <h1 class="hero-title" id="heroTrigger">
+            <span class="static-word">Hey, I'm</span>
+            <span class="highlight-name">Subhas Rayala<span class="tap-hint">tap to say hi →</span></span>
+          </h1>
+          <div class="role-tags">
+            <span class="role-tag">Chemical Engineer</span>
+            <span class="role-tag">Data Enthusiast</span>
+            <span class="role-tag">Video Editor</span>
+            <span class="role-tag">Photographer</span>
+            <span class="role-tag">Gamer</span>
+            <span class="role-tag">Otaku</span>
+          </div>
+          <p class="subtitle">
+            I like building things, breaking things down, and capturing the rest through a lens. This is where engineering, data, and a few creative obsessions live together.
+          </p>
+          <div class="cta-row">
+            <a href="contact.html" class="cta-btn primary">Get in touch</a>
+            <a href="career.html" class="cta-btn secondary">View career</a>
+          </div>
+        </div>
+        <div class="portrait-frame" id="portraitTrigger">
+          <img src="my pic/1.jpg" alt="Subhas Rayala">
+          <span class="portrait-ring-label">Hi there 👋</span>
+        </div>
+      </div>
     </header>
+
+    <h2 class="section-title">Explore</h2>
 
     <nav>
       <ul class="nav-grid">
-        <li class="nav-card"><a href="career.html">Career</a></li>
-        <li class="nav-card"><a href="eng_projects.html">Engineering Projects</a></li>
-        <li class="nav-card"><a href="video_editing.html">Video Editing</a></li>
-        <li class="nav-card"><a href="photography.html">Photography</a></li>
-        <li class="nav-card"><a href="contact.html">Contact</a></li>
+        <li class="nav-card">
+          <a href="career.html">
+            <span class="nav-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </span>
+            <span class="nav-text">
+              <span class="nav-card-title">Career</span>
+              <span class="nav-card-desc">Background, roles and the path so far</span>
+            </span>
+            <span class="nav-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a>
+        </li>
+        <li class="nav-card">
+          <a href="eng_projects.html">
+            <span class="nav-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v6l-5 9a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-5-9V3"/><line x1="8" y1="3" x2="16" y2="3"/></svg>
+            </span>
+            <span class="nav-text">
+              <span class="nav-card-title">Projects</span>
+              <span class="nav-card-desc">Chemical engineering and data-driven builds</span>
+            </span>
+            <span class="nav-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a>
+        </li>
+        <li class="nav-card">
+          <a href="video_editing.html">
+            <span class="nav-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            </span>
+            <span class="nav-text">
+              <span class="nav-card-title">Video Editing</span>
+              <span class="nav-card-desc">Edits, cuts and visual storytelling</span>
+            </span>
+            <span class="nav-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a>
+        </li>
+        <li class="nav-card">
+          <a href="photography.html">
+            <span class="nav-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </span>
+            <span class="nav-text">
+              <span class="nav-card-title">Photography</span>
+              <span class="nav-card-desc">Frames from places, light and moments</span>
+            </span>
+            <span class="nav-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a>
+        </li>
+        <li class="nav-card">
+          <a href="contact.html">
+            <span class="nav-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6 12 13 2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+            </span>
+            <span class="nav-text">
+              <span class="nav-card-title">Contact</span>
+              <span class="nav-card-desc">Reach out, say hi, or just connect</span>
+            </span>
+            <span class="nav-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a>
+        </li>
       </ul>
     </nav>
 
@@ -899,11 +1489,11 @@
     }
 
     // Modal functionality
-    const heroTitle = document.querySelector('.hero-title');
+    const heroTriggers = [document.getElementById('heroTrigger'), document.getElementById('portraitTrigger')];
     const modal = document.getElementById('fullscreenModal');
     const closeBtn = document.getElementById('closeModal');
 
-    heroTitle.addEventListener('click', () => {
+    function openProfileModal() {
       modal.style.display = 'flex';
       setTimeout(() => {
         modal.classList.add('active');
@@ -913,6 +1503,10 @@
       setTimeout(() => {
         typeWriter();
       }, 800);
+    }
+
+    heroTriggers.forEach(trigger => {
+      if (trigger) trigger.addEventListener('click', openProfileModal);
     });
 
     closeBtn.addEventListener('click', () => {
@@ -1042,6 +1636,101 @@
         botLinksPanel.classList.remove('active');
       }
     });
+    // Download modal
+    const appIcon = document.getElementById('appIconContainer');
+    const downloadModal = document.getElementById('downloadModal');
+    const downloadModalClose = document.getElementById('downloadModalClose');
+
+    appIcon.addEventListener('click', () => {
+      downloadModal.style.display = 'flex';
+      setTimeout(() => downloadModal.classList.add('active'), 10);
+    });
+
+    function closeDownloadModal() {
+      downloadModal.classList.remove('active');
+      setTimeout(() => { downloadModal.style.display = 'none'; }, 400);
+    }
+
+    downloadModalClose.addEventListener('click', closeDownloadModal);
+    downloadModal.addEventListener('click', (e) => {
+      if (e.target === downloadModal) closeDownloadModal();
+    });
+
+    // ── Typewriter tooltip engine ──────────────────────────────────────────
+    function makeTooltipTyper(tooltipEl, textEl, fullText, hoverTarget) {
+      let charIndex = 0;
+      let deleting = false;
+      let paused = false;
+      let timer = null;
+      let hovered = false;
+
+      function tick() {
+        if (hovered) { paused = true; return; }
+        paused = false;
+
+        if (!deleting) {
+          // Typing forward
+          charIndex++;
+          textEl.textContent = fullText.substring(0, charIndex);
+          if (charIndex >= fullText.length) {
+            // Fully typed — show for 2.5s then delete
+            tooltipEl.classList.add('visible');
+            timer = setTimeout(() => { deleting = true; tick(); }, 2500);
+            return;
+          }
+        } else {
+          // Deleting
+          charIndex--;
+          textEl.textContent = fullText.substring(0, charIndex);
+          if (charIndex <= 0) {
+            // Fully deleted — hide and wait 3.5s then retype
+            tooltipEl.classList.remove('visible');
+            deleting = false;
+            timer = setTimeout(tick, 3500);
+            return;
+          }
+        }
+
+        tooltipEl.classList.add('visible');
+        const speed = deleting ? 40 : 80;
+        timer = setTimeout(tick, speed);
+      }
+
+      // Start after a short random delay so the two don't sync
+      timer = setTimeout(tick, Math.random() * 1500 + 500);
+
+      // Pause on hover
+      hoverTarget.addEventListener('mouseenter', () => {
+        hovered = true;
+        tooltipEl.classList.remove('visible');
+        clearTimeout(timer);
+      });
+      hoverTarget.addEventListener('mouseleave', () => {
+        hovered = false;
+        // Reset and restart after a moment
+        charIndex = 0;
+        deleting = false;
+        textEl.textContent = '';
+        timer = setTimeout(tick, 800);
+      });
+    }
+
+    // Bot tooltip
+    makeTooltipTyper(
+      document.getElementById('botTooltip'),
+      document.getElementById('botTooltipText'),
+      'ML Bot for Datasets',
+      document.querySelector('.bot-wrapper')
+    );
+
+    // App icon tooltip
+    makeTooltipTyper(
+      document.getElementById('appTooltip'),
+      document.getElementById('appTooltipText'),
+      'Data Analytics Platform',
+      document.getElementById('appIconContainer')
+    );
+
   </script>
 </body>
 </html>
