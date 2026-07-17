@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>theSA — The Structured Analytics</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Animated gradient background — same system as the portfolio site */
+  .gradient-bg {
+    position: fixed; inset: 0; z-index: -1;
+    background: linear-gradient(45deg, #000000, #1a1a1a, #000000, #0a0a0a);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+  .gradient-bg::before {
+    content: '';
+    position: absolute; top:-10%; left:-10%; right:-10%; bottom:-10%;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(120,119,198,0.15), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(243,97,29,0.10), transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(200,200,255,0.10), transparent 50%);
+    animation: float 20s ease-in-out infinite;
+  }
+  @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+  @keyframes float { 0%,100%{transform:translate(0,0)} 33%{transform:translate(20px,-20px)} 66%{transform:translate(-15px,15px)} }
+
+  .cursor-glow {
+    position: fixed; width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+    pointer-events: none; transform: translate(-50%,-50%);
+    transition: opacity 0.3s ease; z-index: 1; opacity: 0;
+  }
+
+  .container { max-width: 980px; margin: 0 auto; padding: 70px 24px 40px; position: relative; z-index: 2; }
+
+  @keyframes fadeInDown { from{opacity:0; transform:translateY(-24px)} to{opacity:1; transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes slideUp { to{opacity:1; transform:translateY(0)} }
+
+  a.back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.82rem; color: rgba(255,255,255,0.5);
+    text-decoration: none; margin-bottom: 46px;
+    transition: color 0.3s ease;
+  }
+  a.back-link:hover { color: #fff; }
+
+  /* ── Hero ─────────────────────────────────────────────── */
+  header.hero {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 54px;
+    animation: fadeInDown 0.9s ease-out;
+  }
+
+  .app-icon-wrap { position: relative; }
+
+  .app-icon {
+    width: 108px; height: 108px; border-radius: 28px;
+    padding: 3px;
+    background: linear-gradient(135deg, rgba(243,97,29,0.9) 0%, rgba(255,255,255,0.5) 50%, rgba(161,159,158,0.7) 100%);
+    cursor: pointer;
+    animation: pulseIcon 3s ease-in-out infinite;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .app-icon:hover { transform: scale(1.05) rotate(-2deg); }
+  @keyframes pulseIcon {
+    0%,100% { box-shadow: 0 0 0 rgba(243,97,29,0); }
+    50% { box-shadow: 0 0 28px rgba(243,97,29,0.35); }
+  }
+  .app-icon-inner {
+    width: 100%; height: 100%; border-radius: 25px;
+    background: #0a0a0a;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 2.1rem; letter-spacing: -0.03em;
+    background-image: linear-gradient(160deg, #101012 0%, #000 100%);
+  }
+  .app-icon-inner span {
+    background: linear-gradient(135deg, #ffffff 0%, #f97a0a 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .app-icon-tap-hint {
+    position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
+    font-size: 0.62rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.35);
+    white-space: nowrap;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.76rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); margin-bottom: 12px;
+  }
+  .eyebrow::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: rgb(243,97,29); box-shadow: 0 0 10px rgba(243,97,29,0.8);
+    animation: pulseDot 2s ease-in-out infinite;
+  }
+  @keyframes pulseDot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700; letter-spacing: -0.03em; line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .hero-title .accent-word {
+    background: linear-gradient(135deg, #f97a0a 0%, #e0e0e0 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    font-weight: 800;
+  }
+  .hero-kicker { font-size: 1.02rem; color: rgba(255,255,255,0.55); font-weight: 400; }
+
+  .subtitle {
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    color: rgba(255,255,255,0.62); line-height: 1.75;
+    max-width: 640px; margin-bottom: 30px;
+    animation: fadeIn 1.3s ease-out 0.2s backwards;
+  }
+
+  .role-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+  .role-tag {
+    font-size: 0.8rem; font-weight: 500; padding: 7px 15px; border-radius: 100px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.72); backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  .role-tag:hover { border-color: rgba(243,97,29,0.6); color: #fff; transform: translateY(-2px); }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 14px 28px; border-radius: 100px;
+    font-size: 0.92rem; font-weight: 600; text-decoration: none; cursor: pointer; border: none;
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .cta-btn.primary {
+    background: linear-gradient(135deg, rgba(239,91,37,0.95), rgba(200,60,10,0.95));
+    color: #fff; border: 1px solid rgba(239,91,37,0.5);
+    box-shadow: 0 4px 20px rgba(239,91,37,0.3);
+  }
+  .cta-btn.primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(239,91,37,0.5); }
+  .cta-btn.secondary {
+    background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+  }
+  .cta-btn.secondary:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); transform: translateY(-3px); }
+
+  /* ── Section title ────────────────────────────────────── */
+  .section-title {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45); margin: 56px 0 22px;
+    display: flex; align-items: center; gap: 14px;
+    animation: fadeIn 1.2s ease-out backwards;
+  }
+  .section-title::after { content:''; flex:1; height:1px; background: linear-gradient(90deg, rgba(255,255,255,0.15), transparent); }
+
+  /* ── Feature groups ───────────────────────────────────── */
+  .group { margin-bottom: 6px; }
+  .group-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgb(243,97,29); margin: 26px 0 12px;
+  }
+  .group-label:first-child { margin-top: 0; }
+
+  .feature-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+
+  .feature-card {
+    display: flex; align-items: flex-start; gap: 18px;
+    padding: 20px 22px; background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px); border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    opacity: 0; transform: translateY(18px);
+    animation: slideUp 0.55s ease-out forwards;
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .feature-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(243,97,29,0.45);
+    transform: translateY(-2px);
+  }
+
+  .feature-icon {
+    flex-shrink: 0; width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    font-size: 1.15rem;
+  }
+  .feature-text { flex: 1; min-width: 0; }
+  .feature-title { font-weight: 600; font-size: 0.98rem; margin-bottom: 4px; }
+  .feature-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.55; }
+
+  /* ── Footer ───────────────────────────────────────────── */
+  footer {
+    text-align: center; margin-top: 80px; padding: 36px 0 10px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    animation: fadeIn 2s ease-out 0.5s backwards;
+  }
+  footer p { color: rgba(255,255,255,0.45); font-size: 0.85rem; }
+  footer .ver { color: rgba(255,255,255,0.3); font-size: 0.78rem; margin-top: 6px; }
+
+  /* ── Download modal ───────────────────────────────────── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 10000;
+    background: rgba(0,0,0,0); backdrop-filter: blur(0px);
+    display: none; align-items: center; justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    padding: 20px;
+  }
+  .modal-overlay.active { display:flex; background: rgba(0,0,0,0.85); backdrop-filter: blur(16px); }
+
+  .modal-box {
+    width: 100%; max-width: 420px;
+    background: rgba(15,15,15,0.92);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 22px;
+    padding: 34px 30px 30px;
+    position: relative;
+    transform: scale(0.9); opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+  .modal-overlay.active .modal-box { transform: scale(1); opacity: 1; }
+
+  .modal-close {
+    position: absolute; top: 18px; right: 18px;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.3s ease;
+  }
+  .modal-close:hover { background: rgba(239,91,37,0.85); transform: rotate(90deg); }
+  .modal-close::before, .modal-close::after {
+    content:''; position:absolute; width:16px; height:2px; background:#fff;
+  }
+  .modal-close::before { transform: rotate(45deg); }
+  .modal-close::after { transform: rotate(-45deg); }
+
+  .modal-icon {
+    width: 64px; height: 64px; border-radius: 18px; margin-bottom: 18px;
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(243,97,29,0.9) 0%, rgba(255,255,255,0.5) 50%, rgba(161,159,158,0.7) 100%);
+  }
+  .modal-icon-inner {
+    width:100%; height:100%; border-radius:16px; background:#0a0a0a;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:1.4rem;
+  }
+  .modal-icon-inner span {
+    background: linear-gradient(135deg, #ffffff 0%, #f97a0a 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .modal-box h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+  .modal-box p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 22px; }
+
+  .modal-download-btn {
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    width: 100%; padding: 14px; border-radius: 12px; border: none;
+    background: linear-gradient(135deg, rgba(239,91,37,0.95), rgba(200,60,10,0.95));
+    color: #fff; font-weight: 600; font-size: 0.94rem; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(239,91,37,0.3);
+    transition: all 0.3s ease;
+  }
+  .modal-download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(239,91,37,0.45); }
+
+  .modal-meta { display: flex; gap: 14px; margin-top: 16px; font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+
+  @media (max-width: 640px) {
+    header.hero { grid-template-columns: 1fr; text-align: center; }
+    .app-icon-wrap { justify-self: center; }
+    .role-tags, .cta-row { justify-content: center; }
+    .feature-card { flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="gradient-bg"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<div class="container">
+
+  <a class="back-link" href="index.html">← Back to portfolio</a>
+
+  <header class="hero">
+    <div class="app-icon-wrap">
+      <div class="app-icon" id="appIconTrigger">
+        <div class="app-icon-inner"><span>SA</span></div>
+      </div>
+      <div class="app-icon-tap-hint">tap to download</div>
+    </div>
+    <div>
+      <div class="eyebrow">Desktop Application · Windows</div>
+      <h1 class="hero-title"><span class="accent-word">theSA</span></h1>
+      <div class="hero-kicker">The Structured Analytics</div>
+    </div>
+  </header>
+
+  <p class="subtitle">
+    One desktop app for the whole life of a dataset — clean it, explore it, model it,
+    and visualize it, without ever leaving the same window. Every module keeps working
+    in the background, and any dataset can be sent straight from one module to the next.
+  </p>
+
+  <div class="role-tags">
+    <span class="role-tag">Data Cleaning</span>
+    <span class="role-tag">Machine Learning</span>
+    <span class="role-tag">Time Series</span>
+    <span class="role-tag">Visualization</span>
+    <span class="role-tag">Sessions &amp; History</span>
+    <span class="role-tag">Light &amp; Dark Themes</span>
+  </div>
+
+  <div class="cta-row">
+    <a href="#" id="heroDownloadBtn" class="cta-btn primary">
+      ⬇ Download for Windows
+    </a>
+    <a href="index.html" class="cta-btn secondary">
+      View Portfolio
+    </a>
+  </div>
+
+  <div class="section-title">What it does</div>
+
+  <div class="group">
+    <div class="group-label">Data Preparation</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🧹</div>
+        <div class="feature-text">
+          <div class="feature-title">Data Cleaning</div>
+          <div class="feature-desc">Fix nulls, remove duplicates, filter and rename columns, handle anomalies and outliers, then export or send the cleaned dataset straight to any other module — no re-uploading.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Modeling</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚠️</div>
+        <div class="feature-text">
+          <div class="feature-title">Find Anomalies</div>
+          <div class="feature-desc">Detect outliers with Isolation Forest, IQR, Local Outlier Factor, or Mahalanobis distance, with interactive graphs to review every flagged point.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-text">
+          <div class="feature-title">Predictions</div>
+          <div class="feature-desc">Train classification or regression models, compare every algorithm side-by-side, then predict on new rows one at a time or in bulk from a file.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-text">
+          <div class="feature-title">Multi Predictions</div>
+          <div class="feature-desc">Train and tune a separate model per output column, compare leaderboards independently, and run bulk predictions across every output at once.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Time Series</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🧩</div>
+        <div class="feature-text">
+          <div class="feature-title">Pattern Detection</div>
+          <div class="feature-desc">Find recurring motifs and unusual regions in a series using matrix-profile analysis — with a live compare view for any two occurrences.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-text">
+          <div class="feature-title">Sudden Changes</div>
+          <div class="feature-desc">Detect change points and regime shifts with Pelt, Binseg, BottomUp, Window, or Dynp — pick a cost model that matches what "a change" means for your data.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <div class="feature-text">
+          <div class="feature-title">Forecast</div>
+          <div class="feature-desc">Forecast future values with a choice of models, visual confidence intervals, and train/test accuracy comparison before you trust a projection.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Visualization</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <div class="feature-text">
+          <div class="feature-title">Plot Graphs</div>
+          <div class="feature-desc">Scatter, line, bar, histogram, box, violin, and more — in X-vs-Y or Trend mode, with reference lines, trend fits, and live zoom/pan.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔀</div>
+        <div class="feature-text">
+          <div class="feature-title">One vs All</div>
+          <div class="feature-desc">Compare one main column against every other column at once, with regression lines and correlation badges on every chart.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🗂️</div>
+        <div class="feature-text">
+          <div class="feature-title">All Columns</div>
+          <div class="feature-desc">Plot every numeric column together — overlayed or in a grid — with normalization so wildly different scales stay comparable.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Specialized</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">♨</div>
+        <div class="feature-text">
+          <div class="feature-title">Heat Exchanger Fouling Analysis</div>
+          <div class="feature-desc">Purpose-built analysis for fouling behaviour over time, for both single and multiple heat exchangers.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Workflow</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🗂️</div>
+        <div class="feature-text">
+          <div class="feature-title">Sessions</div>
+          <div class="feature-desc">Save your entire working state — every open module, every loaded dataset — and pick up exactly where you left off, even after closing the app.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📮</div>
+        <div class="feature-text">
+          <div class="feature-title">Send to Module</div>
+          <div class="feature-desc">Pass a transformed dataset directly into any other module in memory — to one module, several, or all of them — no exporting and re-importing.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <div class="feature-text">
+          <div class="feature-title">Light &amp; Dark Themes</div>
+          <div class="feature-desc">Switch themes and font sizes to match your setup — every module, table, and chart follows along.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>theSA — The Structured Analytics · built by Subhas Rayala</p>
+    <p class="ver">Latest version — Windows desktop</p>
+  </footer>
+
+</div>
+
+<!-- ── Download modal ────────────────────────────────────── -->
+<div class="modal-overlay" id="downloadModal">
+  <div class="modal-box">
+    <div class="modal-close" id="modalClose"></div>
+    <div class="modal-icon"><div class="modal-icon-inner"><span>SA</span></div></div>
+    <h3>Download theSA</h3>
+    <p>Get the latest Windows build of theSA — The Structured Analytics. Unzip, install and run</p>
+
+    <!-- REPLACE href="#" BELOW WITH YOUR GOOGLE DRIVE LINK -->
+    <a href="#" class="modal-download-btn" download>
+      ⬇ Download for Windows
+    </a>
+
+    <div class="modal-meta">
+      <span>Windows 10/11</span>
+      <span>·</span>
+      <span>~ size varies</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Cursor glow
+  const cursorGlow = document.getElementById('cursorGlow');
+  let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursorGlow.style.opacity = '1';
+  });
+  document.addEventListener('mouseleave', () => { cursorGlow.style.opacity = '0'; });
+  function animateGlow() {
+    glowX += (mouseX - glowX) * 0.1;
+    glowY += (mouseY - glowY) * 0.1;
+    cursorGlow.style.left = glowX + 'px';
+    cursorGlow.style.top = glowY + 'px';
+    requestAnimationFrame(animateGlow);
+  }
+  animateGlow();
+
+  // Feature card stagger animation
+  document.querySelectorAll('.feature-card').forEach((card, i) => {
+    card.style.animationDelay = (i * 0.05) + 's';
+  });
+
+  // Download modal
+  const modal = document.getElementById('downloadModal');
+  const modalClose = document.getElementById('modalClose');
+  function openModal() {
+    modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('active'), 10);
+  }
+  function closeModal() {
+    modal.classList.remove('active');
+    setTimeout(() => { modal.style.display = 'none'; }, 350);
+  }
+  document.getElementById('appIconTrigger').addEventListener('click', openModal);
+  document.getElementById('heroDownloadBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    openModal();
+  });
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+</script>
+
+</body>
+</html>

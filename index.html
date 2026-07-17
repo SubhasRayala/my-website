@@ -1306,7 +1306,7 @@
       <!-- Replace 'icons/app-logo.png' with your actual logo file path -->
       <img src="icons/app-logo.png" alt="Data Analytics Platform" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'rgba(255,255,255,0.8)\' stroke-width=\'1.5\'><rect x=\'2\' y=\'3\' width=\'20\' height=\'14\' rx=\'2\'/><polyline points=\'8 21 12 17 16 21\'/><line x1=\'12\' y1=\'17\' x2=\'12\' y2=\'21\'/><polyline points=\'6 9 10 13 14 9 18 11\'/></svg>';" />
     </div>
-    <span class="app-icon-label">Analytics<br>Platform</span>
+    <span class="app-icon-label">Data Analytics<br>Platform</span>
   </div>
 
   <!-- Download Modal -->
@@ -1316,8 +1316,8 @@
       <div class="download-modal-logo">
         <img src="icons/app-logo.png" alt="Data Analytics Platform" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'rgba(255,255,255,0.8)\' stroke-width=\'1.5\'><rect x=\'2\' y=\'3\' width=\'20\' height=\'14\' rx=\'2\'/><polyline points=\'8 21 12 17 16 21\'/><line x1=\'12\' y1=\'17\' x2=\'12\' y2=\'21\'/><polyline points=\'6 9 10 13 14 9 18 11\'/></svg>';" />
       </div>
-      <div class="download-modal-title">Data Analytics Platform</div>
-      <div style="display:inline-block;margin-bottom:14px;padding:4px 14px;border-radius:100px;background:rgba(239,91,37,0.15);border:1px solid rgba(239,91,37,0.45);font-size:0.78rem;font-weight:600;letter-spacing:0.06em;color:rgba(239,91,37,0.95);">Latest Version 1.1.0</div>
+      <div class="download-modal-title">theSA</div>
+      <div style="display:inline-block;margin-bottom:14px;padding:4px 14px;border-radius:100px;background:rgba(239,91,37,0.15);border:1px solid rgba(239,91,37,0.45);font-size:0.78rem;font-weight:600;letter-spacing:0.06em;color:rgba(239,91,37,0.95);">Latest Version 1.2.0</div>
       <div class="download-modal-subtitle">A powerful desktop application for data analysis.<br>Windows only • .exe installer</div>
       <a href="https://drive.google.com/file/d/15w7JzcnCrtA8I_o6akWyVCo9vzCvtZNh/view?usp=sharing" target="_blank" class="download-btn">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1389,6 +1389,16 @@
               <span class="nav-card-desc">Background, roles and the path so far</span>
             </span>
             <span class="nav-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a>
+        </li>
+        <li class="nav-card">
+          <a href="theSA-landing.html">
+            <div class="nav-icon">SA</div>
+            <div class="nav-text">
+              <span class="nav-card-title">theSA — The Structured Analytics</span>
+              <span class="nav-card-desc">Desktop app for cleaning, modeling, and visualizing datasets.</span>
+            </div>
+            <div class="nav-arrow">→</div>
           </a>
         </li>
         <li class="nav-card">
@@ -1716,13 +1726,21 @@
       });
     }
 
-    // Bot tooltip
-    makeTooltipTyper(
-      document.getElementById('botTooltip'),
-      document.getElementById('botTooltipText'),
-      'ML Bot for Datasets',
-      document.querySelector('.bot-wrapper')
-    );
+    // Bot tooltip — same simple show/hide as the app icon tooltip
+    (function () {
+      const tooltipEl = document.getElementById('botTooltip');
+      const textEl    = document.getElementById('botTooltipText');
+      const target    = document.querySelector('.bot-wrapper');
+
+      target.addEventListener('mouseenter', () => {
+        textEl.textContent = 'ML Bot for Datasets';
+        tooltipEl.classList.add('visible');
+      });
+      target.addEventListener('mouseleave', () => {
+        tooltipEl.classList.remove('visible');
+        textEl.textContent = '';
+      });
+    })();
 
     // App icon tooltip — show version badge on hover
     (function () {
@@ -1731,7 +1749,7 @@
       const target    = document.getElementById('appIconContainer');
 
       target.addEventListener('mouseenter', () => {
-        textEl.textContent = 'Latest Version 1.1.0';
+        textEl.textContent = 'Latest Version 1.2.0';
         tooltipEl.classList.add('visible');
       });
       target.addEventListener('mouseleave', () => {
